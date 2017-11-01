@@ -1,5 +1,6 @@
+package Structure;
 
-public class Priority {
+public class Entity {
 
     String name;
 
@@ -7,7 +8,7 @@ public class Priority {
 
     boolean res;
 
-    public Priority(String name, int n, boolean res) {
+    public Entity(String name, int n, boolean res) {
         this.name = name;
         N = n;
         this.res = res;

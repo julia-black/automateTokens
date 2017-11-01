@@ -1,3 +1,8 @@
+package Automates;
+
+import Automates.Automate;
+import Structure.Tetro;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +13,7 @@ public class NotDeterminatedAutomate extends Automate {
 
     protected List<Tetro> transaction; //переходы состояний
 
-    public NotDeterminatedAutomate(List<String> states, List<String> signs, List<String> endStates, List<Tetro> transaction,List<String> beginStates) {
+    public NotDeterminatedAutomate(List<String> states, List<String> signs, List<String> endStates, List<Tetro> transaction, List<String> beginStates) {
         super(states, signs,endStates);
         this.transaction = transaction;
         super.beginState = beginStates;
@@ -17,7 +22,7 @@ public class NotDeterminatedAutomate extends Automate {
 
     //Проверяет, хотя бы одно состояние есть в списке вых. состояний
     @Override
-    protected boolean containsElem(List<String> endStates, List<String> currentStates){
+    public boolean containsElem(List<String> endStates, List<String> currentStates){
         for(String str : currentStates){
             if(endStates.contains(str))
                 return true;
@@ -26,7 +31,7 @@ public class NotDeterminatedAutomate extends Automate {
     }
 
     @Override
-    protected boolean execute(char input) {
+    public boolean execute(char input) {
         if(super.signs.contains(Character.toString(input))) {
             if (states.containsAll(currentStates)) {
                 List<String> newStates = searchItemsInTransaction(input + "", currentStates);
@@ -73,7 +78,7 @@ public class NotDeterminatedAutomate extends Automate {
 
 
     @Override
-    protected List<String> getCurrentState() {
+    public List<String> getCurrentState() {
         return currentStates;
     }
 

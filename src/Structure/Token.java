@@ -1,3 +1,5 @@
+package Structure;
+
 public class Token {
     String name;
     String string;

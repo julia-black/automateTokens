@@ -1,3 +1,7 @@
+package Automates;
+
+import Structure.Tetro;
+
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +58,7 @@ public class DeterminatedAutomate extends Automate {
 
 
     @Override
-    protected boolean containsElem(List<String> endStates, List<String> currentStates) {
+    public boolean containsElem(List<String> endStates, List<String> currentStates) {
            if(endStates.contains(currentState))      {
                return true;
            }

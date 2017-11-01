@@ -1,3 +1,5 @@
+package Structure;
+
 public class Pair implements Comparable<Pair>{
     boolean res;
     int n;

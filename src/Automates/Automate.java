@@ -1,3 +1,7 @@
+package Automates;
+
+import Structure.Tetro;
+
 import java.util.List;
 
 
@@ -5,7 +9,7 @@ public abstract class Automate {
     protected String name;
     protected List<String> beginState;
     protected List<String> states;
-    protected List<String> signs; //входные сигналы
+    public List<String> signs; //входные сигналы
     protected List<String> endStates; //завершающие сигналы
 
 
@@ -29,16 +33,16 @@ public abstract class Automate {
             return false;
 
     }
-    protected abstract boolean containsElem(List<String> endStates, List<String> currentStates);
+    public abstract boolean containsElem(List<String> endStates, List<String> currentStates);
 
-    protected abstract boolean execute(char input);
+    public abstract boolean execute(char input);
 
-    protected abstract List<String> getCurrentState();
+    public abstract List<String> getCurrentState();
 
 
     protected abstract List<String> getBeginState();
 
-    protected List<String> getEndState(){
+    public List<String> getEndState(){
         return endStates;
     }
 

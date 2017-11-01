@@ -1,4 +1,10 @@
-import sun.font.FontRunIterator;
+import Automates.Automate;
+import Automates.DeterminatedAutomate;
+import Structure.Entity;
+import Structure.Pair;
+import Structure.Entity;
+import Structure.Tetro;
+import Structure.Token;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -8,23 +14,21 @@ import java.util.*;
 
 public class Main {
 
-
-
     public static List<String> priority = new ArrayList<>();
 
     //Возвращает true/false и n - максимальную длину найденной подстроки
     private static Pair f(Automate automate, List<Character> chars, int index){
-      //  System.out.println();
+
         boolean result = false;
         int count = 0;
         List<String> states;
         List<String> newStates = null;
         for (int i = index; i < chars.size(); i++) {
             if(automate.signs.contains(chars.get(i).toString())){ //если содержит такой вх. сигнал
-              //  System.out.println(chars.get(i) + " State = " + automate.getCurrentState());
+            //   System.out.println(chars.get(i) + " State = " + automate.getCurrentState());
                 automate.execute(chars.get(i));
                 newStates = automate.getCurrentState();
-              //  System.out.println("New state = " + newStates);
+             //  System.out.println("New state = " + newStates);
             }
             if(newStates != null){
                 states = newStates;
@@ -71,70 +75,6 @@ public class Main {
         return chars;
     }
 
-  // public static void readInputAutomateRN() throws IOException {
-
-  //     List<String> lines = Files.readAllLines(Paths.get("input_automate_task2.txt"), StandardCharsets.UTF_8);
-  //     for(int i = 0; i < lines.size(); i++){
-  //         //Сигналы
-  //         if(i == 0){
-  //             String[] string = lines.get(i).split(" ");
-  //             for(String ch : string){
-  //                 signs.add(ch);
-  //             }
-  //         }
-  //         //Состояния
-  //         else if(i == 1){
-  //             String[] string = lines.get(i).split(" ");
-  //             for(String ch : string){
-  //                 states.add(ch);
-  //             }
-  //         }
-  //         //Вых. состояния
-  //         else if(i==2){
-  //             String[] string = lines.get(i).split(" ");
-  //             for(String ch : string){
-  //                 endStates.add(ch);
-  //             }
-  //         }
-  //         //Табл. переходов
-  //         else
-  //         {
-  //             String[] string = lines.get(i).split("/");
-  //             List<String> input = new ArrayList<>();
-  //             String inputState = "";
-  //             String result = "";
-  //             List<String> results = new ArrayList<>();
-  //             for(int k = 0; k < string.length; k++){
-  //                 //System.out.println(string[i]);
-  //                 String[] elems = string[k].split("'");
-  //                 if(k == 0){
-  //                     for(String ch : elems){
-  //                         input.add(ch);
-
-  //                     }
-  //                 }
-  //                 if(k == 1){ //если это вх. сост
-  //                     inputState = string[k];
-  //                 }
-  //                 else if(k == 2){ //если это вых. сост
-  //                     String[] elems1 = string[k].split("'");
-  //                     if(elems1.length > 1){
-  //                         for(String ch: elems1){
-  //                             results.add(ch);
-  //                             transactions.add(new Tetro(input, inputState, results));
-  //                         }
-  //                     }
-  //                     else {
-  //                         result = string[k];
-  //                         transactions.add(new Tetro(input, inputState, result));
-  //                     }
-  //                 }
-  //             }
-  //         }
-  //     }
-
-  // }
-
     public static void readInputAutomate(Automate automate, String nameOfFile) throws IOException {
 
         List<String> signs = new ArrayList<>();
@@ -164,9 +104,29 @@ public class Main {
                     else if(ch.equals("slash")){
                         signs.add("/");
                     }
+                    else if(ch.equals("other")){
+                        String others = ".,{}[]:@()?<>&^=";
+                        for (int j = 0; j < others.length(); j++) {
+                            signs.add(Character.toString(others.charAt(j)));
+                        }
+                       // System.out.println(signs);
+                    }
+                    //else if(ch.equals("\t")){
+                    //    signs.add("\t");
+                    //}
+                   //else if(ch.equals("\n")){
+                   //    signs.add("\n");
+                   //}
+                   //else if(ch.equals("\r")){
+                   //    signs.add("\r");
+                   //}
+                    else if(ch.equals("\\m")){
+                        signs.add(" ");
+                    }
                     else {
                         signs.add(ch);
                     }
+
                 }
             }
             //Состояния
@@ -211,11 +171,33 @@ public class Main {
                             else if(ch.equals("slash")){
                                 input.add("/");
                             }
+                            else if(ch.equals("other")){
+                                String others = ".,{}[]:@()?<>&^=";
+                                for (int j = 0; j < others.length(); j++) {
+                                    input.add(Character.toString(others.charAt(j)));
+                                }
+                                //System.out.println(signs);
+                            }
+                           //else if(ch.equals("\t")){
+                           //   // System.out.println("add \\t");
+                           //    input.add("\t");
+                           //}
+                            else if(ch.equals("\\m")){
+                                //System.out.println("add \\m");
+                                input.add(" ");
+                            }
+                           // else if(ch.equals("\n")){
+                           //     input.add("\n");
+                           // }
+                           // else if(ch.equals("\r")){
+                           //     input.add("\r");
+                           // }
                             else {
                                 input.add(ch);
                             }
 
                         }
+
                     }
                     if(k == 1){ //если это вх. сост
                         inputState = string[k];
@@ -237,76 +219,12 @@ public class Main {
             }
         }
 
+       // System.out.println(signs);
         automate.setStates(states);
         automate.setSigns(signs);
         automate.setEndStates(endStates);
         automate.setTransaction(transactions);
     }
-
-   // public static void readInputAutomateIN() throws IOException {
-//
-   //     List<String> lines = Files.readAllLines(Paths.get("input_automate_IN.txt"), StandardCharsets.UTF_8);
-   //     for(int i = 0; i < lines.size(); i++){
-   //         //Сигналы
-   //         if(i == 0){
-   //             String[] string = lines.get(i).split(" ");
-   //             for(String ch : string){
-   //                     signs.add(ch);
-   //             }
-   //         }
-   //         //Состояния
-   //         else if(i == 1){
-   //             String[] string = lines.get(i).split(" ");
-   //             for(String ch : string){
-   //                 states.add(ch);
-   //             }
-   //         }
-   //         //Вых. состояния
-   //         else if(i==2){
-   //             String[] string = lines.get(i).split(" ");
-   //             for(String ch : string){
-   //                 endStates.add(ch);
-   //             }
-   //         }
-   //         //Табл. переходов
-   //         else
-   //         {
-   //             String[] string = lines.get(i).split("/");
-   //             List<String> input = new ArrayList<>();
-   //             String inputState = "";
-   //             String result = "";
-   //             List<String> results = new ArrayList<>();
-   //             for(int k = 0; k < string.length; k++){
-   //                 //System.out.println(string[i]);
-   //                 String[] elems = string[k].split("'");
-   //                 if(k == 0){
-   //                     for(String ch : elems){
-//
-   //                             input.add(ch);
-//
-//
-   //                     }
-   //                 }
-   //                 if(k == 1){ //если это вх. сост
-   //                     inputState = string[k];
-   //                 }
-   //                 else if(k == 2){ //если это вых. сост
-   //                     String[] elems1 = string[k].split("'");
-   //                     if(elems1.length > 1){
-   //                         for(String ch: elems1){
-   //                             results.add(ch);
-   //                             transactions.add(new Tetro(input, inputState, results));
-   //                         }
-   //                     }
-   //                     else {
-   //                         result = string[k];
-   //                         transactions.add(new Tetro(input, inputState, result));
-   //                     }
-   //                 }
-   //             }
-   //         }
-   //     }
-   // }
 
     public static void readPriority() throws IOException {
         List<String> lines = Files.readAllLines(Paths.get("input_priority.txt"), StandardCharsets.UTF_8);
@@ -326,7 +244,16 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-
+        Automate automateCM = new DeterminatedAutomate();
+        automateCM.setName("CM");
+        Automate automateKW = new DeterminatedAutomate();
+        automateKW.setName("KW");
+        Automate automateWS = new DeterminatedAutomate();
+        automateWS.setName("WS");
+        Automate automateCB = new DeterminatedAutomate();
+        automateCB.setName("CB");
+        Automate automateOB = new DeterminatedAutomate();
+        automateOB.setName("OB");
         Automate automateID = new DeterminatedAutomate();
         automateID.setName("ID");
         Automate automateIN = new DeterminatedAutomate();
@@ -336,21 +263,28 @@ public class Main {
 
         readInputAutomate(automateID, "input_automate_ID.txt");
         readInputAutomate(automateIN, "input_automate_IN.txt");
-        readInputAutomate(automateRN, "input_automate_task2.txt");
+        readInputAutomate(automateRN, "input_automate_RN.txt");
+        readInputAutomate(automateCB, "input_automate_CB.txt");
+        readInputAutomate(automateOB, "input_automate_OB.txt");
+        readInputAutomate(automateWS, "input_automate_WS.txt");
+        readInputAutomate(automateKW, "input_automate_KW.txt");
+        readInputAutomate(automateCM, "input_automate_CM.txt");
 
         readPriority();
-        System.out.println(priority);
+       // System.out.println(priority);
 
         List<Automate> automates = new ArrayList<>();
+
         for (int i = 0; i < priority.size(); i++) {
-            if(priority.get(i).equals("IN")){
-                automates.add(automateIN);
-            }
-            else if(priority.get(i).equals("ID")){
-                automates.add(automateID);
-            }
-            else if(priority.get(i).equals("RN")){
-                automates.add(automateRN);
+            switch (priority.get(i)){
+                case "IN": automates.add(automateIN); break;
+                case "ID": automates.add(automateID); break;
+                case "RN": automates.add(automateRN); break;
+                case "CB": automates.add(automateCB); break;
+                case "OB": automates.add(automateOB); break;
+                case "WS": automates.add(automateWS); break;
+                case "KW": automates.add(automateKW); break;
+                case "CM": automates.add(automateCM); break;
             }
         }
 
@@ -360,110 +294,49 @@ public class Main {
         List<String> beginState = new ArrayList<>();
         beginState.add("1");
 
-        //String resultsIN = "";
-        //String resultsID = "";
-        //String resultsRN = "";
         System.out.println("\nOutput:");
-
         String results = "";
-        for (int index = 0; index < chars.size();){
-            for (int i = 0; i < automates.size() ; i++) {
+        for (int index = 0; index < chars.size();) {
+            for (int i = 0; i < automates.size(); i++) {
                 automates.get(i).setCurrentState(beginState);
             }
 
-            List<Priority> pairs = new ArrayList<>();
+            List<Entity> pairs = new ArrayList<>();
 
-           //Pair pairIN = f(getAutomateForName(automates,"IN"), chars, index);
-           //pairs.add(new Priority("IN", pairIN.getN(), pairIN.isRes()));
-
-            Pair pairRN = f(getAutomateForName(automates, "RN"), chars, index);
-            pairs.add(new Priority("RN", pairRN.getN(), pairRN.isRes()));
-
-            Pair pairID = f(getAutomateForName(automates, "ID"), chars, index);
-            pairs.add(new Priority("ID", pairID.getN(), pairID.isRes()));
-
-
-           // System.out.println("\n list:");
-           // showList(pairs);
-
+            for (int i = 0; i < automates.size(); i++) {
+                Pair pair = f(automates.get(i),chars, index);
+                pairs.add(new Entity(automates.get(i).getName(), pair.getN(), pair.isRes()));
+                automates.get(i).setCurrentState(beginState);
+            }
+            //System.out.println("\n list:");
+            //showList(pairs);
             sortList(pairs);
-
             //System.out.println("\nnew list:");
-
             //showList(pairs);
 
+            Entity entity = pairs.get(0); //берем первый токен
 
-
-          for (int i = 0; i < pairs.size() ; i++) {
-
-              if(pairs.get(i).isRes()) {
-                //  if (pairs.get(i + 1).isRes() && pairs.get(i).getN() == pairs.get(i + 1).getN()) {
-                //     //если совпали N, то смотрим по приоритету
-                //     if (getIdxPriority(priority, pairs.get(i).getName()) != -1 &&
-                //             getIdxPriority(priority, pairs.get(i).getName()) > getIdxPriority(priority, pairs.get(i + 1).getName())) {
-                //         for (int j = index; j < index + pairs.get(i).getN(); j++) {
-                //             System.out.println(chars.get(j));
-                //             results += chars.get(j).toString();
-                //         }
-                //         tokens.add(new Token(pairs.get(i).getName(), results));
-                //         results = "";
-                //         index += pairs.get(i).getN();
-
-                //     }
-                // } else {
-                      for (int j = index; j < index + pairs.get(i).getN(); j++) {
-                          System.out.println(chars.get(j));
-                          results += chars.get(j).toString();
-                      }
-                      tokens.add(new Token(pairs.get(i).getName(), results));
-                      results = "";
-                      index += pairs.get(i).getN();
-
-                 // }
-              }
-             else {
-                  System.out.println("else");
-                  index++;
-              }
-          }
-
-           //if(pairIN.isRes() && (pairIN.getN() >= pairID.getN())){
-           //for (int i = index; i < index + pairIN.getN(); i++) {
-           //        resultsIN += chars.get(i).toString();
-           //    }
-           //    tokens.add(new Token("IN", resultsIN));
-           //    resultsIN = "";
-           //    index += pairIN.getN();
-           //}
-           //else if(pairID.isRes() && (pairID.getN() > pairIN.getN())){
-           //    for (int i = index; i < index + pairID.getN(); i++) {
-           //        resultsID += chars.get(i).toString();
-           //    }
-           //    tokens.add(new Token("ID", resultsID));
-           //    resultsID = "";
-           //    index += pairID.getN();
-           //}
-           //else if(pairRN.isRes() ){
-           //    for (int i = index; i < index + pairRN.getN(); i++) {
-           //        resultsRN += chars.get(i).toString();
-           //    }
-           //    tokens.add(new Token("RN", resultsRN));
-           //    resultsRN = "";
-           //    index += pairRN.getN();
-           //}
-           //else {
-           //    index++;
-           //}
+            if (entity.isRes()) {
+                for (int i = index; i < index + entity.getN(); i++) {
+                    results += chars.get(i).toString();
+                }
+                tokens.add(new Token(entity.getName(), results));
+                results = "";
+                index += entity.getN();
+              //  System.out.println("result " + tokens.get(tokens.size() -1).getName() + " " +  tokens.get(tokens.size() -1).getString());
+            } else {
+                index++;
+            }
         }
 
-        for (int i = 0; i < tokens.size(); i++) {
-            System.out.println(tokens.get(i).getName() + " - " + tokens.get(i).getString());
-        }
+           for (int i = 0; i < tokens.size(); i++) {
+               System.out.println(tokens.get(i).getName() + " - " + tokens.get(i).getString());
+           }
      }
 
-    private static void sortList(List<Priority> pairs) {
-        System.out.println("Sorting...");
-        Priority temp = null;
+    private static void sortList(List<Entity> pairs) {
+      //System.out.println("Sorting...");
+        Entity temp;
         for(int i=0; i < pairs.size(); i++){
             for(int j=1; j < (pairs.size()-i); j++){
                 if(pairs.get(j-1).getN() < pairs.get(j).getN()){
@@ -478,23 +351,11 @@ public class Main {
 
     }
 
-
-    public static void showList(List<Priority> list){
+    public static void showList(List<Entity> list){
         for (int i = 0; i < list.size() ; i++) {
             System.out.print(list.get(i).getName() + ": " + list.get(i).getN() + " "+  list.get(i).isRes() + ",");
         }
         System.out.println();
     }
-    public static int getIdxPriority(List<String> priority, String name){
-        for (int i = 0; i < priority.size(); i++) {
-            if(priority.get(i).equals(name)){
-                return i;
-            }
-        }
-        return -1;
-    }
-
-
-
 
 }

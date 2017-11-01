@@ -1,0 +1,9 @@
+letter number + - * slash % ! _ | other
+1 2 3 4 5
+2 5
+letter'number'+'-'*'slash'%'!'_/1/2
+letter'number'+'-'*'slash'%'!'_/2/2
+|/1/3
+letter'number'+'-'*'slash'%'!'_'other/3/4
+letter'number'+'-'*'slash'%'!'_'other/4/4
+|/4/5

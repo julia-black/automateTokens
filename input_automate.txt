@@ -1,0 +1,14 @@
+a b c
+s0 s1 s2
+s0 s2
+a/s0/s0
+a/s1/s2
+a/s2/s1
+b/s0/s1
+b/s2/s0
+b/s1/s0's2
+c/s0/s2
+c/s1/s1
+c/s2/s0
+
+//a+56.eb+c-23.e+4a+3e+.e5+5.5.5.5e5+e5 - task2 (???. ?????)

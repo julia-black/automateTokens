@@ -1,5 +1,7 @@
-; letter number + - * . slash % ! _ | other
-1 2 3
-2
+; letter number + - * . slash % ! _ | other \m \ n
+1 2 3 4
+2 4
 ;/1/2
 letter'number'+'-'*'slash'%'!'_'other/2/2
+\/2/3
+n/3/4

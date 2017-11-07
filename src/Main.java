@@ -119,7 +119,7 @@ public class Main {
                         signs.add("/");
                     }
                     else if(ch.equals("other")){
-                        String others = ".,{}[]:@()?<>&^=";
+                        String others = ".,{}[]:@()?<>&^= ";
                         for (int j = 0; j < others.length(); j++) {
                             signs.add(Character.toString(others.charAt(j)));
                         }
@@ -261,7 +261,6 @@ public class Main {
         readInputAutomate(automateCM, "input_automate_CM.txt");
 
         readPriority();
-       // System.out.println(priority);
 
         List<Automate> automates = new ArrayList<>();
 
@@ -281,7 +280,6 @@ public class Main {
         List<Token> tokens = new ArrayList<>();
         List<Character> chars = readInputString();
 
-       // List<String> chars = readInputString();
         List<String> beginState = new ArrayList<>();
         beginState.add("1");
 
@@ -295,7 +293,6 @@ public class Main {
             List<Entity> pairs = new ArrayList<>();
 
             for (int i = 0; i < automates.size(); i++) {
-               // System.out.println("AUTOMATE " + automates.get(i).getName());
                 Pair pair = f(automates.get(i),chars, index);
                 pairs.add(new Entity(automates.get(i).getName(), pair.getN(), pair.isRes()));
                 automates.get(i).setCurrentState(beginState);

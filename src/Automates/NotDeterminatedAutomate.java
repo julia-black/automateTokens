@@ -20,6 +20,10 @@ public class NotDeterminatedAutomate extends Automate {
         this.currentStates = beginStates;
     }
 
+    public NotDeterminatedAutomate() {
+
+    }
+
     //Проверяет, хотя бы одно состояние есть в списке вых. состояний
     @Override
     public boolean containsElem(List<String> endStates, List<String> currentStates){

@@ -1,4 +1,4 @@
-; letter number + - * . slash % ! _ | other \n
+; letter number + - * . slash % ! _ | other
 1 2 3
 2
 ;/1/2

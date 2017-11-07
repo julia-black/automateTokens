@@ -25,10 +25,10 @@ public class Main {
         List<String> newStates = null;
         for (int i = index; i < chars.size(); i++) {
             if(automate.signs.contains(chars.get(i).toString())){ //если содержит такой вх. сигнал
-            //   System.out.println(chars.get(i) + " State = " + automate.getCurrentState());
+              // System.out.println(chars.get(i) + " State = " + automate.getCurrentState());
                 automate.execute(chars.get(i));
                 newStates = automate.getCurrentState();
-             //  System.out.println("New state = " + newStates);
+             // System.out.println("New state = " + newStates);
             }
             if(newStates != null){
                 states = newStates;
@@ -45,31 +45,45 @@ public class Main {
         return pair;
     }
 
-    public static List<Character> readInputString(){
+    public static List<Character> readInputString() throws IOException {
         List<Character> chars = new ArrayList<>();
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(new File("input.txt")));
-            int c;
-            while ((c = reader.read()) != -1) {
-                chars.add((char) c);
-            }
 
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        List<String> lines = Files.readAllLines(Paths.get("input.txt"), StandardCharsets.UTF_8);
+
+        for (int i = 0; i < lines.size() ; i++) {
+            for (int j = 0; j < lines.get(i).length(); j++) {
+                chars.add(lines.get(i).charAt(j));
             }
+           // chars.add(lines.get(i));
+            if(i < lines.size() - 1)
+                chars.add('\n');
         }
         System.out.println("Input string: ");
+
         for (Character c : chars) {
             System.out.print(c);
+        }
+
+        System.out.println("\n\nInput string with spec-symbols:");
+
+        String s = "";
+        for (int i = 0; i < chars.size(); i++) {
+             if(chars.get(i) == '\n') {
+                 s += "\\n";
+             }
+             else if(chars.get(i) == ' '){
+                 s+="\\m";
+             }
+             else
+                s += chars.get(i).toString();
+        }
+
+        s = s.replace("\\m\\m\\m\\m", "\\t");
+
+        System.out.println(s);
+        chars.clear();
+        for (int i = 0; i < s.length(); i++) {
+            chars.add(s.charAt(i));
         }
         System.out.println();
         return chars;
@@ -109,24 +123,13 @@ public class Main {
                         for (int j = 0; j < others.length(); j++) {
                             signs.add(Character.toString(others.charAt(j)));
                         }
-                       // System.out.println(signs);
                     }
-                    //else if(ch.equals("\t")){
-                    //    signs.add("\t");
-                    //}
-                   //else if(ch.equals("\n")){
-                   //    signs.add("\n");
-                   //}
-                   //else if(ch.equals("\r")){
-                   //    signs.add("\r");
-                   //}
                     else if(ch.equals("\\m")){
                         signs.add(" ");
                     }
                     else {
                         signs.add(ch);
                     }
-
                 }
             }
             //Состояния
@@ -178,26 +181,14 @@ public class Main {
                                 }
                                 //System.out.println(signs);
                             }
-                           //else if(ch.equals("\t")){
-                           //   // System.out.println("add \\t");
-                           //    input.add("\t");
-                           //}
+
                             else if(ch.equals("\\m")){
-                                //System.out.println("add \\m");
                                 input.add(" ");
                             }
-                           // else if(ch.equals("\n")){
-                           //     input.add("\n");
-                           // }
-                           // else if(ch.equals("\r")){
-                           //     input.add("\r");
-                           // }
                             else {
                                 input.add(ch);
                             }
-
                         }
-
                     }
                     if(k == 1){ //если это вх. сост
                         inputState = string[k];
@@ -219,7 +210,6 @@ public class Main {
             }
         }
 
-       // System.out.println(signs);
         automate.setStates(states);
         automate.setSigns(signs);
         automate.setEndStates(endStates);
@@ -291,6 +281,7 @@ public class Main {
         List<Token> tokens = new ArrayList<>();
         List<Character> chars = readInputString();
 
+       // List<String> chars = readInputString();
         List<String> beginState = new ArrayList<>();
         beginState.add("1");
 
@@ -304,6 +295,7 @@ public class Main {
             List<Entity> pairs = new ArrayList<>();
 
             for (int i = 0; i < automates.size(); i++) {
+               // System.out.println("AUTOMATE " + automates.get(i).getName());
                 Pair pair = f(automates.get(i),chars, index);
                 pairs.add(new Entity(automates.get(i).getName(), pair.getN(), pair.isRes()));
                 automates.get(i).setCurrentState(beginState);
@@ -315,11 +307,11 @@ public class Main {
             //showList(pairs);
 
             Entity entity = pairs.get(0); //берем первый токен
-
             if (entity.isRes()) {
                 for (int i = index; i < index + entity.getN(); i++) {
                     results += chars.get(i).toString();
                 }
+
                 tokens.add(new Token(entity.getName(), results));
                 results = "";
                 index += entity.getN();

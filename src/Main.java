@@ -230,6 +230,7 @@ public class Main {
         List<String> lines = Files.readAllLines(Paths.get("input_lexems.txt"), StandardCharsets.UTF_8);
         for (int i = 0; i < lines.size(); i++) {
             String[] s = lines.get(i).split(":");
+            //System.out.println(s[0] +" " + Integer.parseInt(s[1]) + " " + s[2]);
             lexemes.add(new Lexeme(s[0], Integer.parseInt(s[1]), s[2]));
 
         }
@@ -260,27 +261,44 @@ public class Main {
         idxState++;
         automate.setName(name);
 
-        for (int i = 0; i < regex.length(); i++) {
+        int N = regex.length();
+        System.out.println(regex + " " + N);
+        for (int i = 0; i < N; i++) {
+            //если просто символы
             if(regex.charAt(i) != '(' && regex.charAt(i) != ')' && regex.charAt(i) != '|'
                     && regex.charAt(i) != '*'){
-                signs.add(Character.toString(regex.charAt(i)));
+                if(regex.charAt(i) == '\\') {
+                    N--;
+                    switch (regex.charAt(i+1)){
+                        case ')':
+                        case '|':
+                        case '?':
+                        case '*':
+                        case '(':
+                            signs.add(Character.toString(regex.charAt(i+1)));
+                            break;
+                    }
+                }
+                else {
+                    signs.add(Character.toString(regex.charAt(i)));
+                }
                 states.add("s" + idxState); //номер состояния равен кол-ву символов, которые уже добавлены
                 idxState++;
-
                 if(signs.size() == 1){ //если это автомат для 1го числа
-
                     endStates.add(states.get(states.size()-1));//то конечным состоянием будет последнее добавленное состояние
-
-
-
                     //transactions.add();
                 }
-               // else{
-               //     endStates.clear();
-               //     endStates.add(states.get(states.size() - 1));
-               // }
+                else{
+                    endStates.clear();
+                    endStates.add(states.get(states.size() - 1));
+                }
                 System.out.println("Input: " + signs.get(signs.size() - 1) + " inpState: " + beginState.get(0) + " resState: " + endStates);
                 transactions.add(new Tetro(signs.get(signs.size() - 1), beginState.get(0), endStates));
+            }
+            else {
+                if(regex.charAt(i) == '|'){
+                    System.out.println("!");
+                }
 
             }
         }

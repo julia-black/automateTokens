@@ -1,6 +1,7 @@
 import Automates.Automate;
 import Automates.DeterminatedAutomate;
 import Automates.NotDeterminatedAutomate;
+import OperationForAutomate.Operations;
 import Structure.*;
 import Structure.Entity;
 
@@ -248,8 +249,7 @@ public class Main {
         return null;
     }
 
-
-    public static Automate createAutomate(String name, String regex){
+    public static Automate createSimpleAutomate(String name, String symbol){ //автомат просто для 1 символа
         Automate automate = new NotDeterminatedAutomate();
         List<String> beginState = new ArrayList<>();
         List<String> states = new ArrayList<>();
@@ -261,51 +261,77 @@ public class Main {
         idxState++;
         automate.setName(name);
 
-        int N = regex.length();
-        System.out.println(regex + " " + N);
-        for (int i = 0; i < N; i++) {
-            //если просто символы
-            if(regex.charAt(i) != '(' && regex.charAt(i) != ')' && regex.charAt(i) != '|'
-                    && regex.charAt(i) != '*'){
-                if(regex.charAt(i) == '\\') {
-                    N--;
-                    switch (regex.charAt(i+1)){
-                        case ')':
-                        case '|':
-                        case '?':
-                        case '*':
-                        case '(':
-                            signs.add(Character.toString(regex.charAt(i+1)));
-                            break;
-                    }
+        //если просто символ
+        if(symbol.length() == 1){
+            System.out.println("!");
+            signs.add(Character.toString(symbol.charAt(0)));
+        }
+        //если это спецсимвол
+        else if(symbol.length() == 2) {
+            if (symbol.charAt(0) == '\\') {
+                switch (symbol.charAt(1)) {
+                    case ')':
+                    case '|':
+                    case '?':
+                    case '*':
+                    case '(':
+                        signs.add(Character.toString(symbol.charAt(1)));
+                        break;
                 }
-                else {
-                    signs.add(Character.toString(regex.charAt(i)));
-                }
-                states.add("s" + idxState); //номер состояния равен кол-ву символов, которые уже добавлены
-                idxState++;
-                if(signs.size() == 1){ //если это автомат для 1го числа
-                    endStates.add(states.get(states.size()-1));//то конечным состоянием будет последнее добавленное состояние
-                    //transactions.add();
-                }
-                else{
-                    endStates.clear();
-                    endStates.add(states.get(states.size() - 1));
-                }
-                System.out.println("Input: " + signs.get(signs.size() - 1) + " inpState: " + beginState.get(0) + " resState: " + endStates);
-                transactions.add(new Tetro(signs.get(signs.size() - 1), beginState.get(0), endStates));
-            }
-            else {
-                if(regex.charAt(i) == '|'){
-                    System.out.println("!");
-                }
-
             }
         }
-       // System.out.println(idxState);
+        states.add("s" + idxState); //номер состояния равен кол-ву символов, которые уже добавлены
+        idxState++;
+        endStates.clear();
+        endStates.add(states.get(states.size()-1));//то конечным состоянием будет последнее добавленное состояние
+
+       // System.out.println(signs.size() + " " + beginState + endStates);
+        transactions.add(new Tetro(signs.get(signs.size() - 1), beginState.get(0), endStates));
+
+        automate.setStates(states);
+        automate.setSigns(signs);
+        automate.setBeginState(beginState);
+        automate.setTransaction(transactions);
+        automate.setEndStates(endStates);
         System.out.println("Signs: " + signs);
         System.out.println("All states: " + states);
-      //  System.out.println(transactions);
+        System.out.println("Begin states: " + beginState);
+        System.out.println("End states: " + endStates);
+        for (int i = 0; i < transactions.size() ; i++) {
+            System.out.println(transactions.get(i).toString());
+        }
+        return automate;
+    }
+
+    public static Automate createAutomate(String name, String regex){
+        Automate automate = new NotDeterminatedAutomate();
+        if(regex.length() < 2 || (regex.length() == 2 && regex.charAt(0) =='\\')){
+            automate = createSimpleAutomate(name, regex);
+        }
+        else//если автомат не из одного символа
+        {
+            System.out.println(regex + regex.length());
+
+            for (int i = 0; i < regex.length(); i++) {
+                if (i == 0) {
+                    if (regex.charAt(i) != '(' && regex.charAt(i) != '|' && regex.charAt(i) != ')') {
+                        Automate automate1 = createSimpleAutomate(name, Character.toString(regex.charAt(i)));
+                        automate = automate1;
+                    }
+                } else {
+                    if (regex.charAt(i) != '(' && regex.charAt(i) != '|' && regex.charAt(i) != ')') {
+                        //System.out.println(regex.substring(i,i+1));
+                        System.out.println("Regex = " + regex.substring(i, i + 1));
+                        Automate automate1 = createSimpleAutomate(name, Character.toString(regex.charAt(i)));
+
+                        System.out.println("Automate builded");
+                        Operations oper = new Operations();
+                        System.out.println(automate.getSigns() + " " + automate1.getSigns());
+                        automate = oper.concat(automate, automate1);
+                    }
+                }
+            }
+        }
         return automate;
     }
 
@@ -319,8 +345,6 @@ public class Main {
         for (int i = 0; i < lexemes.size(); i++) {
             automates.add(createAutomate(lexemes.get(i).getName(), lexemes.get(i).getRegex()));
         }
-
-
 
      //  Automate automateCM = new DeterminatedAutomate();
      //  automateCM.setName("CM");
@@ -365,50 +389,51 @@ public class Main {
      //      }
      //  }
 
-     //  List<Token> tokens = new ArrayList<>();
-     //  List<Character> chars = readInputString();
+       List<Token> tokens = new ArrayList<>();
+       List<Character> chars = readInputString();
 
-     //  List<String> beginState = new ArrayList<>();
-     //  beginState.add("1");
+       List<String> beginState = new ArrayList<>();
+       beginState.add("1");
 
-     //  System.out.println("\nOutput:");
-     //  String results = "";
-     //  for (int index = 0; index < chars.size();) {
-     //      for (int i = 0; i < automates.size(); i++) {
-     //          automates.get(i).setCurrentState(beginState);
-     //      }
+       System.out.println("\nOutput:");
+       String results = "";
+       for (int index = 0; index < chars.size();) {
+           for (int i = 0; i < automates.size(); i++) {
+               //System.out.println(automates.get(i).toString());
+               automates.get(i).setCurrentState(beginState);
+           }
 
-     //      List<Entity> pairs = new ArrayList<>();
+           List<Entity> pairs = new ArrayList<>();
 
-     //      for (int i = 0; i < automates.size(); i++) {
-     //          Pair pair = f(automates.get(i),chars, index);
-     //          pairs.add(new Entity(automates.get(i).getName(), pair.getN(), pair.isRes()));
-     //          automates.get(i).setCurrentState(beginState);
-     //      }
-     //      //System.out.println("\n list:");
-     //      //showList(pairs);
-     //      sortList(pairs);
-     //      //System.out.println("\nnew list:");
-     //      //showList(pairs);
+           for (int i = 0; i < automates.size(); i++) {
+               Pair pair = f(automates.get(i),chars, index);
+               pairs.add(new Entity(automates.get(i).getName(), pair.getN(), pair.isRes()));
+               automates.get(i).setCurrentState(beginState);
+           }
+           //System.out.println("\n list:");
+           //showList(pairs);
+           sortList(pairs);
+           //System.out.println("\nnew list:");
+           //showList(pairs);
 
-     //      Entity entity = pairs.get(0); //берем первый токен
-     //      if (entity.isRes()) {
-     //          for (int i = index; i < index + entity.getN(); i++) {
-     //              results += chars.get(i).toString();
-     //          }
+           Entity entity = pairs.get(0); //берем первый токен
+           if (entity.isRes()) {
+               for (int i = index; i < index + entity.getN(); i++) {
+                   results += chars.get(i).toString();
+               }
 
-     //          tokens.add(new Token(entity.getName(), results));
-     //          results = "";
-     //          index += entity.getN();
-     //        //  System.out.println("result " + tokens.get(tokens.size() -1).getName() + " " +  tokens.get(tokens.size() -1).getString());
-     //      } else {
-     //          index++;
-     //      }
-     //  }
+               tokens.add(new Token(entity.getName(), results));
+               results = "";
+               index += entity.getN();
+             //  System.out.println("result " + tokens.get(tokens.size() -1).getName() + " " +  tokens.get(tokens.size() -1).getString());
+           } else {
+               index++;
+           }
+       }
 
-     //     for (int i = 0; i < tokens.size(); i++) {
-     //         System.out.println(tokens.get(i).getName() + " - " + tokens.get(i).getString());
-     //     }
+          for (int i = 0; i < tokens.size(); i++) {
+              System.out.println(tokens.get(i).getName() + " - " + tokens.get(i).getString());
+          }
      }
 
     private static void sortLexemes(List<Lexeme> lexemes) {

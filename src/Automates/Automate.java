@@ -2,6 +2,7 @@ package Automates;
 
 import Structure.Tetro;
 
+import javax.swing.plaf.nimbus.State;
 import java.util.List;
 
 
@@ -11,7 +12,14 @@ public abstract class Automate {
     protected List<String> states;
     public List<String> signs; //входные сигналы
     protected List<String> endStates; //завершающие сигналы
+    protected List<Tetro> transaction;
 
+
+    public String toString(){
+        String str = "\nName:  " + name + "\nbegState: " + beginState + "\nStates: " + states + "\nSigns: " + signs + "\nendStates: "+ endStates
+                + "\nTransactions: " + transaction;
+        return str;
+    }
 
     public Automate(){
 
@@ -40,7 +48,9 @@ public abstract class Automate {
     public abstract List<String> getCurrentState();
 
 
-    protected abstract List<String> getBeginState();
+    public List<String> getBeginState(){
+        return beginState;
+    }
 
     public List<String> getEndState(){
         return endStates;
@@ -59,8 +69,21 @@ public abstract class Automate {
         this.beginState = beginState;
     }
 
+
     public void setStates(List<String> states) {
         this.states = states;
+    }
+
+    public List<String> getSigns() {
+        return signs;
+    }
+
+    public List<String> getStates() {
+        return states;
+    }
+
+    public List<String> getEndStates() {
+        return endStates;
     }
 
     public void setSigns(List<String> signs) {
@@ -71,5 +94,12 @@ public abstract class Automate {
         this.endStates = endStates;
     }
 
-    public abstract void setTransaction(List<Tetro> transaction);
+    public void setTransaction(List<Tetro> transaction){
+        this.transaction = transaction;
+    }
+
+    public List<Tetro> getTransaction() {
+        return transaction;
+    }
+
 }

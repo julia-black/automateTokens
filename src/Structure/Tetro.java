@@ -26,8 +26,6 @@ public class Tetro {
     public Tetro( String input, String inputState, List<String> results) {
         this.input = new ArrayList<>();
         this.input.add(input);
-
-       // this.input = input;
         this.inputState = inputState;
         this.results = results;
         this.result = null;
@@ -52,6 +50,22 @@ public class Tetro {
         return inputState;
     }
 
+    public String toString() {
+        String str = "Input: ";
+        for (int i = 0; i < input.size(); i++) {
+            str += input.get(i) + " ";
+        }
+        str += "InputState: " + inputState + " Result: ";
+
+        if (result != null) {
+            str += result;
+        } else {
+            for (int i = 0; i < results.size(); i++) {
+                str += results.get(i) + " ";
+            }
+        }
+        return str;
+    }
 
     public String getResult() {
         return result;

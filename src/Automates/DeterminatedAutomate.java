@@ -10,7 +10,7 @@ public class DeterminatedAutomate extends Automate {
 
     private String beginState;
     private static String currentState; //тек. состояние для детерминированного автомата
-    protected List<Tetro> transaction; //переходы состояний
+    //protected List<Tetro> transaction; //переходы состояний
 
 
     public DeterminatedAutomate(){
@@ -36,7 +36,7 @@ public class DeterminatedAutomate extends Automate {
 
 
     @Override
-    protected List<String> getBeginState() {
+    public List<String> getBeginState() {
         List<String> arr = new ArrayList<>();
         arr.add(beginState);
         return arr;

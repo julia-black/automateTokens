@@ -11,7 +11,7 @@ public class NotDeterminatedAutomate extends Automate {
    // private  List<String> beginStates = new ArrayList<>();
     private  List<String> currentStates = new ArrayList<>(); //список тек. состояний для недетерминированного автомата
 
-    protected List<Tetro> transaction; //переходы состояний
+   // protected List<Tetro> transaction; //переходы состояний
 
     public NotDeterminatedAutomate(List<String> states, List<String> signs, List<String> endStates, List<Tetro> transaction, List<String> beginStates) {
         super(states, signs,endStates);
@@ -86,20 +86,20 @@ public class NotDeterminatedAutomate extends Automate {
         return currentStates;
     }
 
-   @Override
-   protected List<String> getBeginState() {
-       return beginState;
-   }
+ //  @Override
+ //  protected List<String> getBeginState() {
+ //      return beginState;
+ //  }
 
     @Override
     public void setCurrentState(List<String> currentState) {
         this.currentStates = currentState;
     }
 
-    @Override
-    public void setTransaction(List<Tetro> transaction) {
-
-    }
+   // @Override
+   // public void setTransaction(List<Tetro> transaction) {
+//
+   // }
 
 
 }

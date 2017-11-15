@@ -1,7 +1,6 @@
-package Automates;
+package automates;
 
-import Automates.Automate;
-import Structure.Tetro;
+import util.Tetro;
 
 import java.util.ArrayList;
 import java.util.List;

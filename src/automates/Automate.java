@@ -1,8 +1,7 @@
-package Automates;
+package automates;
 
-import Structure.Tetro;
+import util.Tetro;
 
-import javax.swing.plaf.nimbus.State;
 import java.util.List;
 
 

@@ -1,4 +1,4 @@
-package Structure;
+package util;
 
 public class Token {
     String name;

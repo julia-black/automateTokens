@@ -1,8 +1,7 @@
-package Automates;
+package automates;
 
-import Structure.Tetro;
+import util.Tetro;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 

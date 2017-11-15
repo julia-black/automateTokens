@@ -1,9 +1,8 @@
-import Automates.Automate;
-import Automates.DeterminatedAutomate;
-import Automates.NotDeterminatedAutomate;
-import OperationForAutomate.Operations;
-import Structure.*;
-import Structure.Entity;
+import automates.Automate;
+import automates.NotDeterminatedAutomate;
+import operationForAutomate.Operations;
+import util.*;
+import util.Entity;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -25,10 +24,10 @@ public class Main {
         List<String> newStates = null;
         for (int i = index; i < chars.size(); i++) {
             if(automate.signs.contains(chars.get(i).toString())){ //если содержит такой вх. сигнал
-              // System.out.println(chars.get(i) + " State = " + automate.getCurrentState());
+               System.out.println(chars.get(i) + " State = " + automate.getCurrentState());
                 automate.execute(chars.get(i));
                 newStates = automate.getCurrentState();
-             // System.out.println("New state = " + newStates);
+              System.out.println("New state = " + newStates);
             }
             if(newStates != null){
                 states = newStates;
@@ -221,9 +220,6 @@ public class Main {
         for (int i = 0; i < lines.size(); i++) {
             priority.add(lines.get(i));
         }
-       // for (int i = 0; i < priority.size(); i++) {
-       //     System.out.println(priority.get(i) + i);
-       // }
     }
 
     public static List<Lexeme> readLexemes()throws IOException{
@@ -293,10 +289,10 @@ public class Main {
         automate.setBeginState(beginState);
         automate.setTransaction(transactions);
         automate.setEndStates(endStates);
-        System.out.println("Signs: " + signs);
-        System.out.println("All states: " + states);
-        System.out.println("Begin states: " + beginState);
-        System.out.println("End states: " + endStates);
+      // System.out.println("Signs: " + signs);
+      // System.out.println("All states: " + states);
+      // System.out.println("Begin states: " + beginState);
+      // System.out.println("End states: " + endStates);
         for (int i = 0; i < transactions.size() ; i++) {
             System.out.println(transactions.get(i).toString());
         }
@@ -332,9 +328,9 @@ public class Main {
                 }
             }
         }
+        automate.setName(name);
         return automate;
     }
-
 
     public static void main(String[] args) throws IOException {
 
@@ -346,6 +342,11 @@ public class Main {
             automates.add(createAutomate(lexemes.get(i).getName(), lexemes.get(i).getRegex()));
         }
 
+        System.out.println("\nAutomates:");
+        for (int i = 0; i <automates.size() ; i++) {
+            System.out.println(automates.get(i).toString());
+        }
+        System.out.println("____\n");
      //  Automate automateCM = new DeterminatedAutomate();
      //  automateCM.setName("CM");
      //  Automate automateKW = new DeterminatedAutomate();
@@ -393,14 +394,15 @@ public class Main {
        List<Character> chars = readInputString();
 
        List<String> beginState = new ArrayList<>();
-       beginState.add("1");
+       beginState.add("s0");
 
        System.out.println("\nOutput:");
        String results = "";
        for (int index = 0; index < chars.size();) {
            for (int i = 0; i < automates.size(); i++) {
-               //System.out.println(automates.get(i).toString());
-               automates.get(i).setCurrentState(beginState);
+              // System.out.println(automates.get(i).toString());
+              // System.out.println("begin state: " + automates.get(i).getBeginState());
+               automates.get(i).setCurrentState(automates.get(i).getBeginState());
            }
 
            List<Entity> pairs = new ArrayList<>();
@@ -408,7 +410,7 @@ public class Main {
            for (int i = 0; i < automates.size(); i++) {
                Pair pair = f(automates.get(i),chars, index);
                pairs.add(new Entity(automates.get(i).getName(), pair.getN(), pair.isRes()));
-               automates.get(i).setCurrentState(beginState);
+               automates.get(i).setCurrentState(automates.get(i).getBeginState());
            }
            //System.out.println("\n list:");
            //showList(pairs);

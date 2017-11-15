@@ -1,6 +1,1 @@
-12 a3s a 3a ;jjj!
-
--23.e+4|abc|
-        ()define if cond lambda ifcond ;ababd
-        +378.34e12.3456
-        condif
+()lambda(

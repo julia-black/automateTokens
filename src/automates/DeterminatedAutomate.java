@@ -9,8 +9,6 @@ public class DeterminatedAutomate extends Automate {
 
     private String beginState;
     private static String currentState; //тек. состояние для детерминированного автомата
-    //protected List<Tetro> transaction; //переходы состояний
-
 
     public DeterminatedAutomate(){
         super();

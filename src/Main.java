@@ -1,4 +1,5 @@
 import automates.Automate;
+import automates.AutomateMaker;
 import automates.NotDeterminatedAutomate;
 import operationForAutomate.Operations;
 import util.*;
@@ -25,8 +26,8 @@ public class Main {
         for (int i = index; i < chars.size(); i++) {
             if(automate.signs.contains(chars.get(i).toString())){ //если содержит такой вх. сигнал
                System.out.println(chars.get(i) + " State = " + automate.getCurrentState());
-                automate.execute(chars.get(i));
-                newStates = automate.getCurrentState();
+               automate.execute(chars.get(i));
+               newStates = automate.getCurrentState();
               System.out.println("New state = " + newStates);
             }
             if(newStates != null){
@@ -65,26 +66,26 @@ public class Main {
 
         System.out.println("\n\nInput string with spec-symbols:");
 
-        String s = "";
-        for (int i = 0; i < chars.size(); i++) {
-             if(chars.get(i) == '\n') {
-                 s += "\\n";
-             }
-             else if(chars.get(i) == ' '){
-                 s+="\\m";
-             }
-             else
-                s += chars.get(i).toString();
-        }
+      // String s = "";
+      // for (int i = 0; i < chars.size(); i++) {
+      //      if(chars.get(i) == '\n') {
+      //          s += "\\n";
+      //      }
+      //      else if(chars.get(i) == ' '){
+      //          s+="\\m";
+      //      }
+      //      else
+      //         s += chars.get(i).toString();
+      // }
 
-        s = s.replace("\\m\\m\\m\\m", "\\t");
+      // s = s.replace("\\m\\m\\m\\m", "\\t");
 
-        System.out.println(s);
-        chars.clear();
-        for (int i = 0; i < s.length(); i++) {
-            chars.add(s.charAt(i));
-        }
-        System.out.println();
+      // System.out.println(s);
+      // chars.clear();
+      // for (int i = 0; i < s.length(); i++) {
+      //     chars.add(s.charAt(i));
+      // }
+      // System.out.println();
         return chars;
     }
 
@@ -333,20 +334,25 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-
         List<Lexeme> lexemes = readLexemes();
         List<Automate> automates = new ArrayList<>();
 
+
         sortLexemes(lexemes);
         for (int i = 0; i < lexemes.size(); i++) {
-            automates.add(createAutomate(lexemes.get(i).getName(), lexemes.get(i).getRegex()));
+            AutomateMaker automateMaker = new AutomateMaker(lexemes.get(i).getName(), lexemes.get(i).getPrior(), lexemes.get(i).getRegex());
+            Automate automateTmp = automateMaker.create(); //создаем автомат
+            System.out.println("\nAUTOMATE" + automateTmp.toString() + "\n_______________");
+            automates.add(automateTmp);
+            //automates.add(automateMaker.create());
+           // automates.add(createAutomate(lexemes.get(i).getName(), lexemes.get(i).getRegex()));
         }
 
-        System.out.println("\nAutomates:");
-        for (int i = 0; i <automates.size() ; i++) {
-            System.out.println(automates.get(i).toString());
-        }
-        System.out.println("____\n");
+      //  System.out.println("\nAutomates:");
+      //  for (int i = 0; i < automates.size() ; i++) {
+      //      System.out.println(automates.get(i).toString());
+      //  }
+
      //  Automate automateCM = new DeterminatedAutomate();
      //  automateCM.setName("CM");
      //  Automate automateKW = new DeterminatedAutomate();
@@ -390,52 +396,55 @@ public class Main {
      //      }
      //  }
 
-       List<Token> tokens = new ArrayList<>();
-       List<Character> chars = readInputString();
+     List<Token> tokens = new ArrayList<>();
+     List<Character> chars = readInputString();
 
-       List<String> beginState = new ArrayList<>();
-       beginState.add("s0");
+    // List<String> beginState = new ArrayList<>();
+    // beginState.add("s0");
 
-       System.out.println("\nOutput:");
-       String results = "";
-       for (int index = 0; index < chars.size();) {
-           for (int i = 0; i < automates.size(); i++) {
-              // System.out.println(automates.get(i).toString());
-              // System.out.println("begin state: " + automates.get(i).getBeginState());
-               automates.get(i).setCurrentState(automates.get(i).getBeginState());
-           }
+     System.out.println("\nOutput:");
+     String results = "";
+     for (int index = 0; index < chars.size();) {
+         for (int i = 0; i < automates.size(); i++) {
+             //устаналиваем состояния всех автоматов  в начальные
 
-           List<Entity> pairs = new ArrayList<>();
+             //System.out.println(automates.get(i).toString());
+            // System.out.println("begin state: " + automates.get(i).getBeginState());
+             automates.get(i).setCurrentState(automates.get(i).getBeginState());
+         }
 
-           for (int i = 0; i < automates.size(); i++) {
-               Pair pair = f(automates.get(i),chars, index);
-               pairs.add(new Entity(automates.get(i).getName(), pair.getN(), pair.isRes()));
-               automates.get(i).setCurrentState(automates.get(i).getBeginState());
-           }
-           //System.out.println("\n list:");
-           //showList(pairs);
-           sortList(pairs);
-           //System.out.println("\nnew list:");
-           //showList(pairs);
+         List<Entity> pairs = new ArrayList<>();
 
-           Entity entity = pairs.get(0); //берем первый токен
-           if (entity.isRes()) {
-               for (int i = index; i < index + entity.getN(); i++) {
-                   results += chars.get(i).toString();
-               }
+         for (int i = 0; i < automates.size(); i++) {
+             automates.get(i).setCurrentState(automates.get(i).getBeginState());
+             Pair pair = f(automates.get(i),chars, index);
 
-               tokens.add(new Token(entity.getName(), results));
-               results = "";
-               index += entity.getN();
-             //  System.out.println("result " + tokens.get(tokens.size() -1).getName() + " " +  tokens.get(tokens.size() -1).getString());
-           } else {
-               index++;
-           }
-       }
+             pairs.add(new Entity(automates.get(i).getName(), pair.getN(), pair.isRes()));
+         }
 
-          for (int i = 0; i < tokens.size(); i++) {
-              System.out.println(tokens.get(i).getName() + " - " + tokens.get(i).getString());
-          }
+         //System.out.println("\n list:");
+         //showList(pairs);
+         sortList(pairs);
+         //System.out.println("\nnew list:");
+         //showList(pairs);
+
+         Entity entity = pairs.get(0); //берем первый токен
+         if (entity.isRes()) {
+             for (int i = index; i < index + entity.getN(); i++) {
+                 results += chars.get(i).toString();
+             }
+             tokens.add(new Token(entity.getName(), results));
+             results = "";
+             index += entity.getN();
+           //  System.out.println("result " + tokens.get(tokens.size() -1).getName() + " " +  tokens.get(tokens.size() -1).getString());
+         } else {
+             index++;
+         }
+     }
+
+        for (int i = 0; i < tokens.size(); i++) {
+            System.out.println(tokens.get(i).getName() + " - " + tokens.get(i).getString());
+        }
      }
 
     private static void sortLexemes(List<Lexeme> lexemes) {
@@ -443,7 +452,6 @@ public class Main {
         for(int i=0; i < lexemes.size(); i++){
             for(int j=1; j < (lexemes.size()-i); j++){
                 if(lexemes.get(j-1).getPrior() < lexemes.get(j).getPrior()){
-
                     temp = lexemes.get(j-1);
                     lexemes.set(j-1, lexemes.get(j));
                     lexemes.set(j, temp);
@@ -465,7 +473,6 @@ public class Main {
                     pairs.set(j-1, pairs.get(j));
                     pairs.set(j, temp);
                 }
-
             }
         }
 

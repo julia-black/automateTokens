@@ -65,6 +65,7 @@ public abstract class Automate {
     public  abstract  void setCurrentState(List<String> currentState);
 
     public void setBeginState(List<String> beginState) {
+        System.out.println("SET BEGIN STATE");
         this.beginState = beginState;
     }
 

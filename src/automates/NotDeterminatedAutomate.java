@@ -4,13 +4,11 @@ import util.Tetro;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 public class NotDeterminatedAutomate extends Automate {
 
-   // private  List<String> beginStates = new ArrayList<>();
     private  List<String> currentStates = new ArrayList<>(); //список тек. состояний для недетерминированного автомата
-
-   // protected List<Tetro> transaction; //переходы состояний
 
     public NotDeterminatedAutomate(List<String> states, List<String> signs, List<String> endStates, List<Tetro> transaction, List<String> beginStates) {
         super(states, signs,endStates);
@@ -19,8 +17,11 @@ public class NotDeterminatedAutomate extends Automate {
         this.currentStates = beginStates;
     }
 
-    public NotDeterminatedAutomate() {
+    public NotDeterminatedAutomate(String name) {
+            this.name = name;
+    }
 
+    public NotDeterminatedAutomate() {
     }
 
     //Проверяет, хотя бы одно состояние есть в списке вых. состояний
@@ -38,12 +39,15 @@ public class NotDeterminatedAutomate extends Automate {
         if(super.signs.contains(Character.toString(input))) {
             if (states.containsAll(currentStates)) {
                 List<String> newStates = searchItemsInTransaction(input + "", currentStates);
-                currentStates.clear();
+
+
+                //currentStates.clear();
                 currentStates = newStates;
                 if(containsElem(endStates, currentStates)){
                         return true;
                 }
             } else {
+                currentStates = beginState;
                 System.out.println("No such states");
                 return false;
             }
@@ -79,26 +83,16 @@ public class NotDeterminatedAutomate extends Automate {
         return newStates;
     }
 
-
     @Override
     public List<String> getCurrentState() {
         return currentStates;
     }
 
- //  @Override
- //  protected List<String> getBeginState() {
- //      return beginState;
- //  }
 
     @Override
     public void setCurrentState(List<String> currentState) {
         this.currentStates = currentState;
     }
-
-   // @Override
-   // public void setTransaction(List<Tetro> transaction) {
-//
-   // }
 
 
 }

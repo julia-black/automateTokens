@@ -46,6 +46,7 @@ public class DeterminatedAutomate extends Automate {
 
 
 
+
     @Override
     public void setTransaction(List<Tetro> transaction) {
         this.transaction = transaction;

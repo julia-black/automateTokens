@@ -36,11 +36,20 @@ public class NotDeterminatedAutomate extends Automate {
 
     @Override
     public boolean execute(char input) {
-        if(super.signs.contains(Character.toString(input))) {
+        System.out.println((Character.toString(input)));
+        if(containsSignal((Character.toString(input)))){
             if (states.containsAll(currentStates)) {
-                List<String> newStates = searchItemsInTransaction(input + "", currentStates);
 
-
+                List<String> newStates;
+                if(signs.contains("\\d") && Character.toString(input).matches("\\d")){
+                    newStates = searchItemsInTransaction("\\d" + "", currentStates);
+                }
+                else if(signs.contains("\\w") && Character.toString(input).matches("\\w")){
+                    newStates = searchItemsInTransaction("\\w" + "", currentStates);
+                }
+                else {
+                   newStates = searchItemsInTransaction(input + "", currentStates);
+                }
                 //currentStates.clear();
                 currentStates = newStates;
                 if(containsElem(endStates, currentStates)){
@@ -48,7 +57,7 @@ public class NotDeterminatedAutomate extends Automate {
                 }
             } else {
                 currentStates = beginState;
-                System.out.println("No such states");
+             //   System.out.println("No such states");
                 return false;
             }
         }

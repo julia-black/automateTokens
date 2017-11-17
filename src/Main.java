@@ -16,6 +16,7 @@ public class Main {
     public static List<String> priority = new ArrayList<>();
 
     public static int idxState = 0;
+
     //Возвращает true/false и n - максимальную длину найденной подстроки
     private static Pair f(Automate automate, List<Character> chars, int index){
 
@@ -24,7 +25,8 @@ public class Main {
         List<String> states;
         List<String> newStates = null;
         for (int i = index; i < chars.size(); i++) {
-            if(automate.signs.contains(chars.get(i).toString())){ //если содержит такой вх. сигнал
+           // if(automate.signs.contains(chars.get(i).toString())){ //если содержит такой вх. сигнал
+            if(automate.containsSignal(chars.get(i).toString())){
                System.out.println(chars.get(i) + " State = " + automate.getCurrentState());
                automate.execute(chars.get(i));
                newStates = automate.getCurrentState();
@@ -64,7 +66,7 @@ public class Main {
             System.out.print(c);
         }
 
-        System.out.println("\n\nInput string with spec-symbols:");
+     //   System.out.println("\n\nInput string with spec-symbols:");
 
       // String s = "";
       // for (int i = 0; i < chars.size(); i++) {
@@ -333,6 +335,10 @@ public class Main {
         return automate;
     }
 
+    public static int getIdxState() {
+        return idxState;
+    }
+
     public static void main(String[] args) throws IOException {
         List<Lexeme> lexemes = readLexemes();
         List<Automate> automates = new ArrayList<>();
@@ -399,17 +405,12 @@ public class Main {
      List<Token> tokens = new ArrayList<>();
      List<Character> chars = readInputString();
 
-    // List<String> beginState = new ArrayList<>();
-    // beginState.add("s0");
-
      System.out.println("\nOutput:");
      String results = "";
      for (int index = 0; index < chars.size();) {
          for (int i = 0; i < automates.size(); i++) {
              //устаналиваем состояния всех автоматов  в начальные
-
              //System.out.println(automates.get(i).toString());
-            // System.out.println("begin state: " + automates.get(i).getBeginState());
              automates.get(i).setCurrentState(automates.get(i).getBeginState());
          }
 

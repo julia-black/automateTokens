@@ -24,8 +24,7 @@ public class AutomateMaker {
         operators = new ArrayDeque<>();
     }
 
-    public Automate createSimpleAutomate(String name, String symbol){ //автомат просто для 1 символа
-      //  Automate automate = new NotDeterminatedAutomate();
+    public Automate createSimpleAutomate(String name, String symbol){ //автомат для 1 символа
         List<String> beginState = new ArrayList<>();
         List<String> states = new ArrayList<>();
         List<String> signs = new ArrayList<>();
@@ -34,8 +33,6 @@ public class AutomateMaker {
         beginState.add("s"+idxState);
         states.addAll(beginState);
         idxState++;
-        //automate.setName(name);
-
         signs.add(symbol);
         states.add("s" + idxState); //номер состояния равен кол-ву символов, которые уже добавлены
         idxState++;
@@ -66,7 +63,7 @@ public class AutomateMaker {
                     break;
                 case ')':
                     while (operators.peekLast() != '(') {
-                        action(operators.pollLast());
+                        executeOperation(operators.pollLast());
                     }
                     operators.pollLast();
                     break;
@@ -74,8 +71,8 @@ public class AutomateMaker {
                 case '^':
                 case '|':
                     char currentOperator = regex.charAt(i);
-                    while (operators.size() != 0 && prioritet(operators.peekLast()) >= prioritet(currentOperator)) {
-                        action(operators.pollLast());
+                    while (operators.size() != 0 && getPriorityOperation(operators.peekLast()) >= getPriorityOperation(currentOperator)) {
+                        executeOperation(operators.pollLast());
                     }
                     operators.addLast(currentOperator);
                     break;
@@ -94,7 +91,6 @@ public class AutomateMaker {
                             automates.addLast(createSimpleAutomate(name, "\r"));
                             break;
                         case 'n':
-                            System.out.println("!!!!!!!!!!");
                             automates.addLast(createSimpleAutomate(name, "\n"));
                             break;
                         case '?':
@@ -112,19 +108,23 @@ public class AutomateMaker {
         }
         while (operators.size() != 0)
         {
-            action(operators.pollLast());
+            executeOperation(operators.pollLast());
         }
         if(automates.size()==1)
             return automates.pollLast();
         return null;
     }
 
-    private void action(char op) {
-       switch (op) {
-           case '*':
+    private void executeOperation(char operation) {
+       switch (operation) {
+           case '*': {
                System.out.println("Iteration");
-              // NotDeterminatedAutomate tmp = (NotDeterminatedAutomate)automates.pollLast();
-              // automates.addLast(tmp.iteration());
+               NotDeterminatedAutomate automate = (NotDeterminatedAutomate) automates.pollLast();
+               Automate resAutomate = operations.iteration(automate, idxState);
+               idxState++;
+               resAutomate.setName(name);
+               automates.addLast(resAutomate);
+           }
                break;
            case '|': {
                System.out.println("Union");
@@ -147,14 +147,14 @@ public class AutomateMaker {
        }
     }
 
-    private int prioritet(char op) {
-        switch (op) {
+    private int getPriorityOperation(char operation) {
+        switch (operation) {
             case '|':
-                return 1;
+                return 0;
             case '^':
-                return 2;
+                return 1;
             case '*':
-                return 3;
+                return 2;
             default:
                 return -1;
         }
@@ -171,37 +171,4 @@ public class AutomateMaker {
             }
         }
     }
-
-  //  public static Automate createAutomate(String name, String regex){
-  //      Automate automate = new NotDeterminatedAutomate();
-  //      if(regex.length() < 2 || (regex.length() == 2 && regex.charAt(0) =='\\')){
-  //          automate = createSimpleAutomate(name, regex);
-  //      }
-  //      else//если автомат не из одного символа
-  //      {
-  //          System.out.println(regex + regex.length());
-//
-  //          for (int i = 0; i < regex.length(); i++) {
-  //              if (i == 0) {
-  //                  if (regex.charAt(i) != '(' && regex.charAt(i) != '|' && regex.charAt(i) != ')') {
-  //                      Automate automate1 = createSimpleAutomate(name, Character.toString(regex.charAt(i)));
-  //                      automate = automate1;
-  //                  }
-  //              } else {
-  //                  if (regex.charAt(i) != '(' && regex.charAt(i) != '|' && regex.charAt(i) != ')') {
-  //                      //System.out.println(regex.substring(i,i+1));
-  //                      System.out.println("Regex = " + regex.substring(i, i + 1));
-  //                      Automate automate1 = createSimpleAutomate(name, Character.toString(regex.charAt(i)));
-//
-  //                      System.out.println("Automate builded");
-  //                      Operations oper = new Operations();
-  //                      System.out.println(automate.getSigns() + " " + automate1.getSigns());
-  //                      automate = oper.concat(automate, automate1);
-  //                  }
-  //              }
-  //          }
-  //      }
-  //      automate.setName(name);
-  //      return automate;
-  //  }
 }

@@ -65,11 +65,33 @@ public abstract class Automate {
     public  abstract  void setCurrentState(List<String> currentState);
 
     public void setBeginState(List<String> beginState) {
-        System.out.println("SET BEGIN STATE");
+       // System.out.println("SET BEGIN STATE");
         this.beginState = beginState;
     }
 
 
+    public boolean containsSignal(String symbol){
+        for(String str : signs) {
+            switch (str) {
+                case "\\w":
+                    if (symbol.matches("\\w")) {
+                        System.out.println("This is letter");
+                        return true;
+                    }
+                    break;
+                case "\\d":
+                    if (symbol.matches("\\d")) {
+                        System.out.println("This is number");
+                        return true;
+                    }
+                default:
+                    if(str.equals(symbol)){
+                        return true;
+                    }
+            }
+        }
+        return false;
+    }
     public void setStates(List<String> states) {
         this.states = states;
     }

@@ -28,8 +28,6 @@ public class Operations {
             //states
 
             List<String> resStates = unionListWithOutDuble(automate1.getStates(), automate2.getStates());
-            //        automate1.getStates();
-            //resStates.addAll(automate2.getStates());
             resAutomate.setStates(resStates);
 
             //transactions
@@ -38,8 +36,6 @@ public class Operations {
 
             //signs
             List<String> resSigns = unionListWithOutDuble(automate1.getSigns(), automate2.getSigns());
-           //         automate1.getSigns();
-           // resSigns.addAll(automate2.getSigns());
 
            // System.out.println("BEG STATE = " + automate1.getBeginState());
             resAutomate.setBeginState(automate1.getBeginState());
@@ -50,24 +46,23 @@ public class Operations {
             for (int i = 0; i < automate1.getEndState().size(); i++) {
                 Automate copyAutomate2 = automate2;
                 copyAutomate2.setCurrentState(automate2.getBeginState());
-                System.out.println("Aut2 signs" + automate2.getSigns());
                 char symbol = automate2.getSigns().get(0).charAt(0);
                 if(automate2.getSigns().get(0).equals("\\d")){
-                    symbol = '1';
+                    symbol = '2';
                 }
                 else if(automate2.getSigns().get(0).equals("\\w")){
                     symbol = 'a';
                 }
-
                 copyAutomate2.execute(symbol);
-                resTransaction.add(new Tetro(automate2.getSigns().get(0).toString(), automate1.getEndState().get(i), copyAutomate2.getCurrentState()));
+
+                for (int j = 0; j < automate2.getSigns().size(); j++) {
+                    resTransaction.add(new Tetro(automate2.getSigns().get(j).toString(), automate1.getEndState().get(i), copyAutomate2.getCurrentState()));
+                }
             }
             return  resAutomate;
-
         }
         else
             return automate2;
-
     }
 
     public Automate union(Automate automate1, Automate automate2){
@@ -116,15 +111,12 @@ public class Operations {
                 symbol = 'a';
             }
             copyAutomate.execute(symbol);
-            //copyAutomate.execute(automate.getSigns().get(0).toString().charAt(0));
-           // for (int j = 0; j < automat ; j++) {
-           //
-           // }
 
-            //НАДО СДЕЛАТЬ ЦИКЛ ПО ВСЕМ СИГНАЛАМ И ДОБАВЛЯТЬ ИХ ВСЕ В ТРАНЗАКЦИИ ТАКИМ СПОСОБОМ
-            resTransaction.add(new Tetro(automate.getSigns().get(0).toString(), automate.getEndState().get(i), copyAutomate.getCurrentState()));
+            for (int j = 0; j < automate.getSigns().size(); j++) {
+                resTransaction.add(new Tetro(automate.getSigns().get(j).toString(), automate.getEndState().get(i), copyAutomate.getCurrentState()));
+            }
+
         }
-       // System.out.println("NEW STATE s"+idx);
         //Добавляем новое состояние и делаем его заключительным и начальным
         List<String> resBeginStates = automate.getBeginState();
         resBeginStates.add("s"+ idx);

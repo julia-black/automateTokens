@@ -44,13 +44,13 @@ public class AutomateMaker {
 
         Automate automate = new NotDeterminatedAutomate(states, signs, endStates,transactions, beginState);
         automate.setName(name);
-        System.out.println("Signs: " + signs);
-        System.out.println("All states: " + states);
-        System.out.println("Begin states: " + beginState);
-        System.out.println("End states: " + endStates);
-        for (int i = 0; i < transactions.size() ; i++) {
-            System.out.println(transactions.get(i).toString());
-        }
+      //System.out.println("Signs: " + signs);
+      //System.out.println("All states: " + states);
+      //System.out.println("Begin states: " + beginState);
+      //System.out.println("End states: " + endStates);
+      //for (int i = 0; i < transactions.size() ; i++) {
+      //    System.out.println(transactions.get(i).toString());
+      //}
         return automate;
     }
 
@@ -118,7 +118,7 @@ public class AutomateMaker {
     private void executeOperation(char operation) {
        switch (operation) {
            case '*': {
-               System.out.println("Iteration");
+              // System.out.println("Iteration");
                NotDeterminatedAutomate automate = (NotDeterminatedAutomate) automates.pollLast();
                Automate resAutomate = operations.iteration(automate, idxState);
                idxState++;
@@ -127,7 +127,7 @@ public class AutomateMaker {
            }
                break;
            case '|': {
-               System.out.println("Union");
+              // System.out.println("Union");
                NotDeterminatedAutomate automate1 = (NotDeterminatedAutomate) automates.pollLast();
                NotDeterminatedAutomate automate2 = (NotDeterminatedAutomate) automates.pollLast();
                Automate resAutomate = operations.union(automate2, automate1);
@@ -136,7 +136,7 @@ public class AutomateMaker {
            }
                break;
            case '^': {
-               System.out.println("Concat");
+            //   System.out.println("Concat");
                NotDeterminatedAutomate automate1 = (NotDeterminatedAutomate) automates.pollLast();
                NotDeterminatedAutomate automate2 = (NotDeterminatedAutomate) automates.pollLast();
                Automate resAutomate = operations.concat(automate2, automate1);

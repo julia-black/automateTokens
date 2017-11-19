@@ -75,13 +75,13 @@ public abstract class Automate {
             switch (str) {
                 case "\\w":
                     if (symbol.matches("\\w")) {
-                        System.out.println("This is letter");
+                       // System.out.println("This is letter");
                         return true;
                     }
                     break;
                 case "\\d":
                     if (symbol.matches("\\d")) {
-                        System.out.println("This is number");
+                       // System.out.println("This is number");
                         return true;
                     }
                 default:

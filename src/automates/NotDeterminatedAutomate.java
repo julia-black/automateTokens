@@ -36,7 +36,7 @@ public class NotDeterminatedAutomate extends Automate {
 
     @Override
     public boolean execute(char input) {
-        System.out.println((Character.toString(input)));
+        //System.out.println((Character.toString(input)));
         if(containsSignal((Character.toString(input)))){
             if (states.containsAll(currentStates)) {
 

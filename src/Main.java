@@ -27,10 +27,10 @@ public class Main {
         for (int i = index; i < chars.size(); i++) {
            // if(automate.signs.contains(chars.get(i).toString())){ //если содержит такой вх. сигнал
             if(automate.containsSignal(chars.get(i).toString())){
-               System.out.println(chars.get(i) + " State = " + automate.getCurrentState());
+             //  System.out.println(chars.get(i) + " State = " + automate.getCurrentState());
                automate.execute(chars.get(i));
                newStates = automate.getCurrentState();
-              System.out.println("New state = " + newStates);
+             // System.out.println("New state = " + newStates);
             }
             if(newStates != null){
                 states = newStates;
@@ -66,28 +66,21 @@ public class Main {
             System.out.print(c);
         }
 
-     //   System.out.println("\n\nInput string with spec-symbols:");
+     //System.out.println("\n\nInput string with spec-symbols:");
 
-      // String s = "";
-      // for (int i = 0; i < chars.size(); i++) {
-      //      if(chars.get(i) == '\n') {
-      //          s += "\\n";
-      //      }
-      //      else if(chars.get(i) == ' '){
-      //          s+="\\m";
-      //      }
-      //      else
-      //         s += chars.get(i).toString();
-      // }
+     //String s = "";
+     //for (int i = 0; i < chars.size(); i++) {
+     //     if(chars.get(i) == '\n') {
+     //         s += "\\n";
+     //     }
+     //     else
+     //        s += chars.get(i).toString();
+     //}
+     //// s = s.replace("\\m\\m\\m\\m", "\\t");
 
-      // s = s.replace("\\m\\m\\m\\m", "\\t");
+     // System.out.println(s);
 
-      // System.out.println(s);
-      // chars.clear();
-      // for (int i = 0; i < s.length(); i++) {
-      //     chars.add(s.charAt(i));
-      // }
-      // System.out.println();
+       //System.out.println();
         return chars;
     }
 
@@ -230,7 +223,7 @@ public class Main {
         List<String> lines = Files.readAllLines(Paths.get("input_lexems.txt"), StandardCharsets.UTF_8);
         for (int i = 0; i < lines.size(); i++) {
             String[] s = lines.get(i).split(":");
-            //System.out.println(s[0] +" " + Integer.parseInt(s[1]) + " " + s[2]);
+
             lexemes.add(new Lexeme(s[0], Integer.parseInt(s[1]), s[2]));
 
         }
@@ -248,6 +241,14 @@ public class Main {
         return null;
     }
 
+    private static String getStringWithSpecSymbols(String str) {
+        str = str.replace("\t","\\t");
+        str = str.replace("\n", "\\n");
+        str = str.replace("\r","\\r");
+        str = str.replace(" ", "\\m");
+        return str;
+    }
+
     public static Automate createSimpleAutomate(String name, String symbol){ //автомат просто для 1 символа
         Automate automate = new NotDeterminatedAutomate();
         List<String> beginState = new ArrayList<>();
@@ -262,7 +263,6 @@ public class Main {
 
         //если просто символ
         if(symbol.length() == 1){
-            System.out.println("!");
             signs.add(Character.toString(symbol.charAt(0)));
         }
         //если это спецсимвол
@@ -296,48 +296,12 @@ public class Main {
       // System.out.println("All states: " + states);
       // System.out.println("Begin states: " + beginState);
       // System.out.println("End states: " + endStates);
-        for (int i = 0; i < transactions.size() ; i++) {
-            System.out.println(transactions.get(i).toString());
-        }
+       // for (int i = 0; i < transactions.size() ; i++) {
+       //     System.out.println(transactions.get(i).toString());
+       // }
         return automate;
     }
 
-    public static Automate createAutomate(String name, String regex){
-        Automate automate = new NotDeterminatedAutomate();
-        if(regex.length() < 2 || (regex.length() == 2 && regex.charAt(0) =='\\')){
-            automate = createSimpleAutomate(name, regex);
-        }
-        else//если автомат не из одного символа
-        {
-            System.out.println(regex + regex.length());
-
-            for (int i = 0; i < regex.length(); i++) {
-                if (i == 0) {
-                    if (regex.charAt(i) != '(' && regex.charAt(i) != '|' && regex.charAt(i) != ')') {
-                        Automate automate1 = createSimpleAutomate(name, Character.toString(regex.charAt(i)));
-                        automate = automate1;
-                    }
-                } else {
-                    if (regex.charAt(i) != '(' && regex.charAt(i) != '|' && regex.charAt(i) != ')') {
-                        //System.out.println(regex.substring(i,i+1));
-                        System.out.println("Regex = " + regex.substring(i, i + 1));
-                        Automate automate1 = createSimpleAutomate(name, Character.toString(regex.charAt(i)));
-
-                        System.out.println("Automate builded");
-                        Operations oper = new Operations();
-                        System.out.println(automate.getSigns() + " " + automate1.getSigns());
-                        automate = oper.concat(automate, automate1);
-                    }
-                }
-            }
-        }
-        automate.setName(name);
-        return automate;
-    }
-
-    public static int getIdxState() {
-        return idxState;
-    }
 
     public static void main(String[] args) throws IOException {
         List<Lexeme> lexemes = readLexemes();
@@ -348,59 +312,9 @@ public class Main {
         for (int i = 0; i < lexemes.size(); i++) {
             AutomateMaker automateMaker = new AutomateMaker(lexemes.get(i).getName(), lexemes.get(i).getPrior(), lexemes.get(i).getRegex());
             Automate automateTmp = automateMaker.create(); //создаем автомат
-            System.out.println("\nAUTOMATE" + automateTmp.toString() + "\n_______________");
+          //  System.out.println("\nAUTOMATE" + automateTmp.toString() + "\n_______________");
             automates.add(automateTmp);
-            //automates.add(automateMaker.create());
-           // automates.add(createAutomate(lexemes.get(i).getName(), lexemes.get(i).getRegex()));
         }
-
-      //  System.out.println("\nAutomates:");
-      //  for (int i = 0; i < automates.size() ; i++) {
-      //      System.out.println(automates.get(i).toString());
-      //  }
-
-     //  Automate automateCM = new DeterminatedAutomate();
-     //  automateCM.setName("CM");
-     //  Automate automateKW = new DeterminatedAutomate();
-     //  automateKW.setName("KW");
-     //  Automate automateWS = new DeterminatedAutomate();
-     //  automateWS.setName("WS");
-     //  Automate automateCB = new DeterminatedAutomate();
-     //  automateCB.setName("CB");
-     //  Automate automateOB = new DeterminatedAutomate();
-     //  automateOB.setName("OB");
-     //  Automate automateID = new DeterminatedAutomate();
-     //  automateID.setName("ID");
-     //  Automate automateIN = new DeterminatedAutomate();
-     //  automateIN.setName("IN");
-     //  Automate automateRN = new DeterminatedAutomate();
-     //  automateRN.setName("RN");
-
-     //  readInputAutomate(automateID, "input_automate_ID.txt");
-     //  readInputAutomate(automateIN, "input_automate_IN.txt");
-     //  readInputAutomate(automateRN, "input_automate_RN.txt");
-     //  readInputAutomate(automateCB, "input_automate_CB.txt");
-     //  readInputAutomate(automateOB, "input_automate_OB.txt");
-     //  readInputAutomate(automateWS, "input_automate_WS.txt");
-     //  readInputAutomate(automateKW, "input_automate_KW.txt");
-     //  readInputAutomate(automateCM, "input_automate_CM.txt");
-
-     //  readPriority();
-
-     //  List<Automate> automates = new ArrayList<>();
-
-     //  for (int i = 0; i < priority.size(); i++) {
-     //      switch (priority.get(i)){
-     //          case "IN": automates.add(automateIN); break;
-     //          case "ID": automates.add(automateID); break;
-     //          case "RN": automates.add(automateRN); break;
-     //          case "CB": automates.add(automateCB); break;
-     //          case "OB": automates.add(automateOB); break;
-     //          case "WS": automates.add(automateWS); break;
-     //          case "KW": automates.add(automateKW); break;
-     //          case "CM": automates.add(automateCM); break;
-     //      }
-     //  }
 
      List<Token> tokens = new ArrayList<>();
      List<Character> chars = readInputString();
@@ -444,7 +358,7 @@ public class Main {
      }
 
         for (int i = 0; i < tokens.size(); i++) {
-            System.out.println(tokens.get(i).getName() + " - " + tokens.get(i).getString());
+            System.out.println(tokens.get(i).getName() + " - \"" + getStringWithSpecSymbols(tokens.get(i).getString()) + "\"");
         }
      }
 

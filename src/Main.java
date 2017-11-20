@@ -242,9 +242,11 @@ public class Main {
     }
 
     private static String getStringWithSpecSymbols(String str) {
+
         str = str.replace("\t","\\t");
         str = str.replace("\n", "\\n");
         str = str.replace("\r","\\r");
+        str = str.replace("    ","\\t");
         str = str.replace(" ", "\\m");
         return str;
     }
@@ -358,7 +360,7 @@ public class Main {
      }
 
         for (int i = 0; i < tokens.size(); i++) {
-            System.out.println(tokens.get(i).getName() + " - \"" + getStringWithSpecSymbols(tokens.get(i).getString()) + "\"");
+            System.out.println(tokens.get(i).getName() + " - " + getStringWithSpecSymbols(tokens.get(i).getString()));
         }
      }
 

@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56548320-a17e-472b-a2b1-d349d841efbc" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Automates/Automates/Automate.class" afterPath="$PROJECT_DIR$/out/production/Automates/Automates/Automate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Automates/Automates/NotDeterminatedAutomate.class" afterPath="$PROJECT_DIR$/out/production/Automates/Automates/NotDeterminatedAutomate.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Automates/Main.class" afterPath="$PROJECT_DIR$/out/production/Automates/Main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input.txt" afterPath="$PROJECT_DIR$/input.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input_automate.txt" afterPath="$PROJECT_DIR$/input_automate.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input_lexems.txt" afterPath="$PROJECT_DIR$/input_lexems.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/automates/Automate.java" afterPath="$PROJECT_DIR$/src/automates/Automate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/automates/AutomateMaker.java" afterPath="$PROJECT_DIR$/src/automates/AutomateMaker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/automates/NotDeterminatedAutomate.java" afterPath="$PROJECT_DIR$/src/automates/NotDeterminatedAutomate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/operationForAutomate/Operations.java" afterPath="$PROJECT_DIR$/src/operationForAutomate/Operations.java" />
     </list>
     <ignored path="Automates.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,13 +33,12 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="247" column="7" selection-start-line="247" selection-start-column="7" selection-end-line="247" selection-end-column="7" />
+            <state relative-caret-position="154">
+              <caret line="226" column="0" selection-start-line="226" selection-start-column="0" selection-end-line="226" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#readInputAutomate#0;class#Main#0" expanded="false" />
                 <element signature="method#readPriority#0;class#Main#0" expanded="false" />
-                <element signature="method#getAutomateForName#0;class#Main#0" expanded="false" />
                 <element signature="method#sortLexemes#0;class#Main#0" expanded="false" />
                 <element signature="method#sortList#0;class#Main#0" expanded="false" />
                 <element signature="method#showList#0;class#Main#0" expanded="false" />
@@ -53,7 +50,7 @@
       <file leaf-file-name="Automate.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/automates/Automate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
+            <state relative-caret-position="1020">
               <caret line="83" column="31" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="31" />
               <folding>
                 <element signature="method#toString#0;class#Automate#0" expanded="false" />
@@ -64,20 +61,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lexer.lex" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Downloads/Automate-master/src/main/resources/lexic/lexer.lex">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AutomateMaker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/automates/AutomateMaker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
+            <state relative-caret-position="1581">
               <caret line="169" column="22" selection-start-line="169" selection-start-column="18" selection-end-line="169" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -92,7 +79,7 @@
       <file leaf-file-name="DeterminatedAutomate.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/automates/DeterminatedAutomate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="663">
               <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
               <folding />
             </state>
@@ -102,7 +89,7 @@
       <file leaf-file-name="NotDeterminatedAutomate.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/automates/NotDeterminatedAutomate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
+            <state relative-caret-position="544">
               <caret line="38" column="10" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -112,11 +99,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="input_lexems.txt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="input_lexems.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/input_lexems.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+            <state relative-caret-position="119">
+              <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="input_priority.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/input_priority.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -125,7 +122,7 @@
       <file leaf-file-name="Operations.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/operationForAutomate/Operations.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
+            <state relative-caret-position="561">
               <caret line="39" column="18" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="18" />
               <folding />
             </state>
@@ -142,11 +139,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="input.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="input.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/input.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+            <state relative-caret-position="102">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -210,13 +207,13 @@
         <option value="$PROJECT_DIR$/src/automates/NonDeterminatedAutomate.java" />
         <option value="$PROJECT_DIR$/src/automates/DeterminatedAutomate.java" />
         <option value="$PROJECT_DIR$/input_automate.txt" />
-        <option value="$PROJECT_DIR$/input_lexems.txt" />
         <option value="$PROJECT_DIR$/src/automates/Automate.java" />
         <option value="$PROJECT_DIR$/src/operationForAutomate/Operations.java" />
         <option value="$PROJECT_DIR$/src/automates/AutomateMaker.java" />
         <option value="$PROJECT_DIR$/src/automates/NotDeterminatedAutomate.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/input.txt" />
+        <option value="$PROJECT_DIR$/input_lexems.txt" />
       </list>
     </option>
   </component>
@@ -257,6 +254,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -328,8 +327,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -726,7 +723,8 @@
       <workItem from="1510831331691" duration="285000" />
       <workItem from="1510832108993" duration="9362000" />
       <workItem from="1510921700075" duration="7550000" />
-      <workItem from="1511086613126" duration="2559000" />
+      <workItem from="1511086613126" duration="3566000" />
+      <workItem from="1511160235349" duration="1052000" />
     </task>
     <task id="LOCAL-00001" summary="Added task 3 (not complette)">
       <created>1508850582778</created>
@@ -763,31 +761,37 @@
       <option name="project" value="LOCAL" />
       <updated>1510928723744</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added and fix few new regex in input">
+      <created>1511089233993</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1511089233993</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67164000" />
+    <option name="totallyTimeSpent" value="69223000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32135308" sideWeight="0.49791232" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45348838" sideWeight="0.16701461" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45348838" sideWeight="0.17014614" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45348838" sideWeight="0.8329854" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45348838" sideWeight="0.82985383" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2759009" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17066807" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767624" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -799,6 +803,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767624" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -847,7 +852,8 @@
     <MESSAGE value="Fixed concatination" />
     <MESSAGE value="Added class AutomateMaker. Fixed concat and added union automates." />
     <MESSAGE value="Fixed few bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed few bugs" />
+    <MESSAGE value="Added and fix few new regex in input" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added and fix few new regex in input" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -904,7 +910,6 @@
             <element signature="imports" expanded="true" />
             <element signature="method#readInputAutomate#0;class#Main#0" expanded="false" />
             <element signature="method#readPriority#0;class#Main#0" expanded="false" />
-            <element signature="method#getAutomateForName#0;class#Main#0" expanded="false" />
             <element signature="method#sortLexemes#0;class#Main#0" expanded="false" />
             <element signature="method#sortList#0;class#Main#0" expanded="false" />
             <element signature="method#showList#0;class#Main#0" expanded="false" />
@@ -978,7 +983,6 @@
             <element signature="imports" expanded="true" />
             <element signature="method#readInputAutomate#0;class#Main#0" expanded="false" />
             <element signature="method#readPriority#0;class#Main#0" expanded="false" />
-            <element signature="method#getAutomateForName#0;class#Main#0" expanded="false" />
             <element signature="method#sortLexemes#0;class#Main#0" expanded="false" />
             <element signature="method#sortList#0;class#Main#0" expanded="false" />
             <element signature="method#showList#0;class#Main#0" expanded="false" />
@@ -1160,14 +1164,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/input_priority.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Downloads/Automate-master/src/main/resources/lexic/lexer.lex">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1176,17 +1172,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/input_lexems.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/automates/Automate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
+        <state relative-caret-position="1020">
           <caret line="83" column="31" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="31" />
           <folding>
             <element signature="method#toString#0;class#Automate#0" expanded="false" />
@@ -1198,7 +1186,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/automates/DeterminatedAutomate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="663">
           <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding />
         </state>
@@ -1206,7 +1194,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/automates/AutomateMaker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
+        <state relative-caret-position="1581">
           <caret line="169" column="22" selection-start-line="169" selection-start-column="18" selection-end-line="169" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1219,7 +1207,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/operationForAutomate/Operations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
+        <state relative-caret-position="561">
           <caret line="39" column="18" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="18" />
           <folding />
         </state>
@@ -1227,27 +1215,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/automates/NotDeterminatedAutomate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
+        <state relative-caret-position="544">
           <caret line="38" column="10" selection-start-line="38" selection-start-column="10" selection-end-line="38" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#searchItemsInTransaction#0;class#NotDeterminatedAutomate#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="247" column="7" selection-start-line="247" selection-start-column="7" selection-end-line="247" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#readInputAutomate#0;class#Main#0" expanded="false" />
-            <element signature="method#readPriority#0;class#Main#0" expanded="false" />
-            <element signature="method#getAutomateForName#0;class#Main#0" expanded="false" />
-            <element signature="method#sortLexemes#0;class#Main#0" expanded="false" />
-            <element signature="method#sortList#0;class#Main#0" expanded="false" />
-            <element signature="method#showList#0;class#Main#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1262,8 +1234,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/input.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+        <state relative-caret-position="102">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/input_priority.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="226" column="0" selection-start-line="226" selection-start-column="0" selection-end-line="226" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#readInputAutomate#0;class#Main#0" expanded="false" />
+            <element signature="method#readPriority#0;class#Main#0" expanded="false" />
+            <element signature="method#sortLexemes#0;class#Main#0" expanded="false" />
+            <element signature="method#sortList#0;class#Main#0" expanded="false" />
+            <element signature="method#showList#0;class#Main#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/input_lexems.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
           <folding />
         </state>
       </provider>

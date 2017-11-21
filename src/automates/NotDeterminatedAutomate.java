@@ -62,7 +62,7 @@ public class NotDeterminatedAutomate extends Automate {
             }
         }
         else {
-            System.out.println("No such sign");
+          //  System.out.println("No such sign");
             return false;
         }
         return false;

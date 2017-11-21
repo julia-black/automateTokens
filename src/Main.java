@@ -251,60 +251,6 @@ public class Main {
         return str;
     }
 
-    public static Automate createSimpleAutomate(String name, String symbol){ //автомат просто для 1 символа
-        Automate automate = new NotDeterminatedAutomate();
-        List<String> beginState = new ArrayList<>();
-        List<String> states = new ArrayList<>();
-        List<String> signs = new ArrayList<>();
-        List<Tetro> transactions = new ArrayList<>();
-        List<String> endStates = new ArrayList<>();
-        beginState.add("s"+idxState);
-        states.addAll(beginState);
-        idxState++;
-        automate.setName(name);
-
-        //если просто символ
-        if(symbol.length() == 1){
-            signs.add(Character.toString(symbol.charAt(0)));
-        }
-        //если это спецсимвол
-        else if(symbol.length() == 2) {
-            if (symbol.charAt(0) == '\\') {
-                switch (symbol.charAt(1)) {
-                    case ')':
-                    case '|':
-                    case '?':
-                    case '*':
-                    case '(':
-                        signs.add(Character.toString(symbol.charAt(1)));
-                        break;
-                }
-            }
-        }
-        states.add("s" + idxState); //номер состояния равен кол-ву символов, которые уже добавлены
-        idxState++;
-        endStates.clear();
-        endStates.add(states.get(states.size()-1));//то конечным состоянием будет последнее добавленное состояние
-
-       // System.out.println(signs.size() + " " + beginState + endStates);
-        transactions.add(new Tetro(signs.get(signs.size() - 1), beginState.get(0), endStates));
-
-        automate.setStates(states);
-        automate.setSigns(signs);
-        automate.setBeginState(beginState);
-        automate.setTransaction(transactions);
-        automate.setEndStates(endStates);
-      // System.out.println("Signs: " + signs);
-      // System.out.println("All states: " + states);
-      // System.out.println("Begin states: " + beginState);
-      // System.out.println("End states: " + endStates);
-       // for (int i = 0; i < transactions.size() ; i++) {
-       //     System.out.println(transactions.get(i).toString());
-       // }
-        return automate;
-    }
-
-
     public static void main(String[] args) throws IOException {
         List<Lexeme> lexemes = readLexemes();
         List<Automate> automates = new ArrayList<>();
@@ -314,7 +260,7 @@ public class Main {
         for (int i = 0; i < lexemes.size(); i++) {
             AutomateMaker automateMaker = new AutomateMaker(lexemes.get(i).getName(), lexemes.get(i).getPrior(), lexemes.get(i).getRegex());
             Automate automateTmp = automateMaker.create(); //создаем автомат
-          //  System.out.println("\nAUTOMATE" + automateTmp.toString() + "\n_______________");
+        //    System.out.println("\nAUTOMATE" + automateTmp.toString() + "\n_______________");
             automates.add(automateTmp);
         }
 
@@ -333,6 +279,7 @@ public class Main {
          List<Entity> pairs = new ArrayList<>();
 
          for (int i = 0; i < automates.size(); i++) {
+
              automates.get(i).setCurrentState(automates.get(i).getBeginState());
              Pair pair = f(automates.get(i),chars, index);
 
@@ -359,11 +306,26 @@ public class Main {
          }
      }
 
+        String text = "";
         for (int i = 0; i < tokens.size(); i++) {
+            text += tokens.get(i).getName() + " - " + getStringWithSpecSymbols(tokens.get(i).getString()) + "\n";
             System.out.println(tokens.get(i).getName() + " - " + getStringWithSpecSymbols(tokens.get(i).getString()));
         }
+        writeResult(text);
      }
 
+   private static void writeResult(String tokens){
+       try(FileWriter writer = new FileWriter("output.txt", false))
+       {
+           // запись всей строки
+           writer.write(tokens);
+
+       }
+       catch(IOException ex){
+           System.out.println(ex.getMessage());
+       }
+
+   }
     private static void sortLexemes(List<Lexeme> lexemes) {
         Lexeme temp;
         for(int i=0; i < lexemes.size(); i++){

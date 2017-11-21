@@ -51,6 +51,8 @@ public class AutomateMaker {
       //for (int i = 0; i < transactions.size() ; i++) {
       //    System.out.println(transactions.get(i).toString());
       //}
+        //System.out.println("SIMPLE AUTOMATE");
+       // System.out.println(automate);
         return automate;
     }
 

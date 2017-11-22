@@ -44,15 +44,9 @@ public class AutomateMaker {
 
         Automate automate = new NotDeterminatedAutomate(states, signs, endStates,transactions, beginState);
         automate.setName(name);
-      //System.out.println("Signs: " + signs);
-      //System.out.println("All states: " + states);
-      //System.out.println("Begin states: " + beginState);
-      //System.out.println("End states: " + endStates);
-      //for (int i = 0; i < transactions.size() ; i++) {
-      //    System.out.println(transactions.get(i).toString());
-      //}
-        //System.out.println("SIMPLE AUTOMATE");
-       // System.out.println(automate);
+
+        System.out.println("SIMPLE AUTOMATE");
+        System.out.println(automate);
         return automate;
     }
 

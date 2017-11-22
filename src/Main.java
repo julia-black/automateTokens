@@ -223,14 +223,8 @@ public class Main {
         List<String> lines = Files.readAllLines(Paths.get("input_lexems.txt"), StandardCharsets.UTF_8);
         for (int i = 0; i < lines.size(); i++) {
             String[] s = lines.get(i).split(":");
-
             lexemes.add(new Lexeme(s[0], Integer.parseInt(s[1]), s[2]));
-
         }
-
-       //for (int i = 0; i < lexems.size(); i++) {
-       //    System.out.println(lexems.get(i).getName() + " " + lexems.get(i).getPrior() + " " + lexems.get(i).getRegex());
-       //}
         return lexemes;
     }
 
@@ -308,8 +302,8 @@ public class Main {
 
         String text = "";
         for (int i = 0; i < tokens.size(); i++) {
-            text += tokens.get(i).getName() + " - " + getStringWithSpecSymbols(tokens.get(i).getString()) + "\n";
-            System.out.println(tokens.get(i).getName() + " - " + getStringWithSpecSymbols(tokens.get(i).getString()));
+            text += "<" + tokens.get(i).getName() + "," + getStringWithSpecSymbols(tokens.get(i).getString()) + ">\n";
+            System.out.println("<" + tokens.get(i).getName() + "," + getStringWithSpecSymbols(tokens.get(i).getString()) + ">");
         }
         writeResult(text);
      }

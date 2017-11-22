@@ -23,7 +23,7 @@ public class Operations {
         return resList;
     }
     public Automate concat(Automate automate1, Automate automate2){
-       // System.out.println("Concat");
+       System.out.println("\nConcat");
 
         if(automate1 != null) {
             Automate resAutomate = new NotDeterminatedAutomate();
@@ -57,46 +57,6 @@ public class Operations {
 
             for (int i = 0; i < automate1.getEndState().size(); i++) {
                 Automate copyAutomate2 = automate2;
-             //   System.out.println("BEGIN STATE " + automate2.getBeginState());
-
-               //for (int j = 0; j < automate2.getBeginState().size() ; j++) {
-               //    System.out.println(automate2.getBeginState().get(j));
-
-               //   // copyAutomate2.setCurrentState(automate2.getBeginState());
-               //    List<String> copyBegState = new ArrayList<>();
-               //    copyBegState.add(automate2.getBeginState().get(j));
-               //   // copyAutomate2.setCurrentState(automate2.getBeginState().get(j).);
-               //    copyAutomate2.setCurrentState(copyBegState);
-
-               //    for (int k = 0; k < automate2.getSigns().size(); k++) {
-               //        char symbol = automate2.getSigns().get(k).charAt(0);
-
-               //        if(automate2.getSigns().get(0).equals("\\d")){
-               //            symbol = '2';
-               //        }
-               //        else if(automate2.getSigns().get(0).equals("\\w")){
-               //            symbol = 'a';
-               //        }
-               //        copyAutomate2.execute(symbol);
-               //       // for (int k = 0; k < automate2.getSigns().size(); k++) {
-               //            resTransaction.add(new Tetro(automate2.getSigns().get(k).toString(), automate1.getEndState().get(i), copyAutomate2.getCurrentState()));
-               //      //  }
-               //    }
-               //    //char symbol = automate2.getSigns().get(0).charAt(0);
-               //    //
-               //    //if(automate2.getSigns().get(0).equals("\\d")){
-               //    //    symbol = '2';
-               //    //}
-               //    //else if(automate2.getSigns().get(0).equals("\\w")){
-               //    //    symbol = 'a';
-               //    //}
-               //    //copyAutomate2.execute(symbol);
-
-
-               //    for (int k = 0; k < automate2.getSigns().size(); k++) {
-               //        resTransaction.add(new Tetro(automate2.getSigns().get(k).toString(), automate1.getEndState().get(i), copyAutomate2.getCurrentState()));
-               //    }
-               //}
                 copyAutomate2.setCurrentState(automate2.getBeginState());
                 for (int j = 0; j < automate2.getSigns().size(); j++) {
                     copyAutomate2.setCurrentState(automate2.getBeginState());
@@ -112,13 +72,12 @@ public class Operations {
                    // System.out.println("symbol " + symbol + " state " + copyAutomate2.getCurrentState());
                     copyAutomate2.execute(symbol);
 
-                  //  System.out.println("new state " +copyAutomate2.getCurrentState());
-////
+                  //  System.out.println("new state " + copyAutomate2.getCurrentState());
                     //for (int j = 0; j < automate2.getSigns().size(); j++) {
                     resTransaction.add(new Tetro(automate2.getSigns().get(j).toString(), automate1.getEndState().get(i), copyAutomate2.getCurrentState()));
                 }
             }
-          //  System.out.println(resAutomate.toString());
+            System.out.println(resAutomate.toString());
             return  resAutomate;
         }
         else
@@ -126,7 +85,7 @@ public class Operations {
     }
 
     public Automate union(Automate automate1, Automate automate2){
-      //  System.out.println("Union");
+        System.out.println("\nUnion");
         Automate resAutomate =  new NotDeterminatedAutomate();
 
         //1.в новый автомат переносим все сост-я и переходы исходных автоматов
@@ -135,13 +94,20 @@ public class Operations {
         resAutomate.setStates(resStates);
 
         //transactions
+        System.out.println("Trans. 1: " + automate1.getTransaction());
+        System.out.println("Trans. 2: " + automate2.getTransaction());
         List<Tetro> resTransaction = automate1.getTransaction();
         resTransaction.addAll(automate2.getTransaction());
+
+
+        //НЕПРавильно здесь трензакции соединяются
+        System.out.println("Trans. : " + resAutomate.getTransaction());
         resAutomate.setTransaction(resTransaction);
 
         //signs
-        List<String> resSigns = automate1.getSigns();
-        resSigns.addAll(automate2.getSigns());
+        List<String> resSigns = unionListWithOutDuble(automate1.getSigns(), automate2.getSigns());
+                //automate1.getSigns();
+       // resSigns.addAll(automate2.getSigns());
         resAutomate.setSigns(resSigns);
 
         //2.Все началальные состояние - начальные
@@ -154,12 +120,12 @@ public class Operations {
         resEndStates.addAll(automate2.getEndStates());
         resAutomate.setEndStates(resEndStates);
 
-      //  System.out.println(resAutomate.toString());
+        System.out.println(resAutomate.toString());
         return resAutomate;
     }
 
     public Automate iteration(Automate automate, int idx){
-      //  System.out.println("Iteration");
+        System.out.println("\nIteration");
 
         //Из всех заключительных состояний организуем переходы туда же, куда есть переходы из нач состояний
         List<Tetro> resTransaction = automate.getTransaction();
@@ -196,7 +162,7 @@ public class Operations {
         Automate resAutomate =  new NotDeterminatedAutomate(resStates, automate.getSigns(),
                resEndStates, resTransaction, resBeginStates);
 
-        //System.out.println(resAutomate.toString());
+        System.out.println(resAutomate.toString());
         return resAutomate;
 
     }

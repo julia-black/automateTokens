@@ -24,6 +24,14 @@ public abstract class Automate {
 
     }
 
+    public Automate(Automate automate1){
+        this.name = "Copy " + automate1.getName();
+        this.beginState = automate1.getBeginState();
+        this.states = automate1.getStates();
+        this.endStates = automate1.getEndStates();
+        this.signs = automate1.getSigns();
+        this.transaction = automate1.getTransaction();
+    }
     public String getName() {
         return name;
     }
@@ -51,9 +59,6 @@ public abstract class Automate {
         return beginState;
     }
 
-    public List<String> getEndState(){
-        return endStates;
-    }
 
     public Automate(List<String> states, List<String> signs, List<String> endStates) {
         this.states = states;

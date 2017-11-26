@@ -1,1 +1,8 @@
-01010
+0010010010
+0101110000110110
+abcba+122aa!a 12.1e+2 |abc{}123#@| .1e+5
+
+
+ab() +43  ;comment{}
+lambda if lambdaif
+    ;ddsdsds if

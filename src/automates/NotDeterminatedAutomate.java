@@ -17,6 +17,10 @@ public class NotDeterminatedAutomate extends Automate {
         this.currentStates = beginStates;
     }
 
+    public NotDeterminatedAutomate(Automate automate1){
+        super(automate1);
+    }
+
     public NotDeterminatedAutomate(String name) {
             this.name = name;
     }
@@ -57,12 +61,12 @@ public class NotDeterminatedAutomate extends Automate {
                 }
             } else {
                 currentStates = beginState;
-             //   System.out.println("No such states");
+              // System.out.println("No such states");
                 return false;
             }
         }
         else {
-          //  System.out.println("No such sign");
+            //System.out.println("No such sign");
             return false;
         }
         return false;

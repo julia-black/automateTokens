@@ -35,7 +35,7 @@ public class Main {
             if(newStates != null){
                 states = newStates;
                 newStates = null;
-                if(automate.containsElem(automate.getEndState(), states)){
+                if(automate.containsElem(automate.getEndStates(), states)){
                     count = i - index + 1;
                     result = true;
                 }
@@ -248,7 +248,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         List<Lexeme> lexemes = readLexemes();
         List<Automate> automates = new ArrayList<>();
-
 
         sortLexemes(lexemes);
         for (int i = 0; i < lexemes.size(); i++) {

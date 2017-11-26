@@ -71,4 +71,7 @@ public class Tetro {
         return result;
     }
 
+    public void setResults(List<String> results) {
+        this.results = results;
+    }
 }

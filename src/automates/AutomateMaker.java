@@ -45,8 +45,9 @@ public class AutomateMaker {
         Automate automate = new NotDeterminatedAutomate(states, signs, endStates,transactions, beginState);
         automate.setName(name);
 
-        System.out.println("SIMPLE AUTOMATE");
-        System.out.println(automate);
+     //   System.out.println("\nSIMPLE AUTOMATE");
+     //   System.out.println(automate);
+    //    System.out.println("___________\n");
         return automate;
     }
 
